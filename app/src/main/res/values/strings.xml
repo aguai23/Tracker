@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Tracker</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_personal_page">Personal_page</string>
+    <string name="title_activity_tracking">Map</string>
+    <string name="title_activity_search_contact">search_contact</string>
+    <string name="title_activity_being_tracked">being_tracked</string>
 </resources>
