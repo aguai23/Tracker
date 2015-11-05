@@ -61,6 +61,11 @@
             android:label="@string/title_activity_being_tracked"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".tracking_page"
+            android:label="@string/title_activity_tracking_page"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>
