@@ -7,4 +7,5 @@
     <string name="title_activity_search_contact">search_contact</string>
     <string name="title_activity_being_tracked">being_tracked</string>
     <string name="title_activity_tracking_page">tracking_page</string>
+    <string name="title_activity_notification_page">notification_page</string>
 </resources>
