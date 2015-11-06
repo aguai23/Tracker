@@ -1,7 +1,10 @@
 package com.tracker.tracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,6 +14,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class TrackingPage extends FragmentActivity implements OnMapReadyCallback {
 
+    private Button listButton;
+
     private GoogleMap mMap;
 
     @Override
@@ -19,7 +24,8 @@ public class TrackingPage extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_tracking_page);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
-
+        listButton = (Button) findViewById(R.id.listButton);
+        listButton.setOnClickListener(listButtonListener);
     }
 
 
@@ -42,5 +48,11 @@ public class TrackingPage extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
-
+    private View.OnClickListener listButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(TrackingPage.this, SpecificLocation.class);
+            startActivity(intent);
+        }
+    };
 }

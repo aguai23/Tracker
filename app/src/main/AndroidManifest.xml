@@ -19,6 +19,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Register"
+            android:label="@string/register"
+            android:parentActivityName=".Login" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Login" />
+        </activity>
+        <activity
             android:name=".PersonalPage"
             android:label="@string/personal_page"
             android:parentActivityName=".Login" >
@@ -41,6 +49,30 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".PersonalPage" />
+        </activity>
+        <activity
+            android:name=".SpecificLocation"
+            android:label="@string/specific_location"
+            android:parentActivityName=".TrackingPage" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TrackingPage" />
+        </activity>
+        <activity
+            android:name=".TrackeePage"
+            android:label="@string/trackee_page"
+            android:parentActivityName=".PersonalPage" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PersonalPage" />
+        </activity>
+        <activity
+            android:name=".Notification"
+            android:label="@string/notification"
+            android:parentActivityName=".TrackeePage" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TrackeePage" />
         </activity>
     </application>
 

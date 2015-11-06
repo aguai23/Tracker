@@ -26,18 +26,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/back"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Contact List"
-        android:id="@+id/list"
+        android:id="@+id/listButton"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"/>
 

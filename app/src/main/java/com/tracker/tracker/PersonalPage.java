@@ -30,6 +30,8 @@ public class PersonalPage extends AppCompatActivity {
         trackingButton = (Button) findViewById(R.id.tracking_button);
         trackingButton.setOnClickListener(trackingButtonListener);
 
+        trackeeButton = (Button) findViewById(R.id.trackee_button);
+        trackeeButton.setOnClickListener(trackeeButtonListener);
     }
 
     private View.OnClickListener profileButtonListener = new View.OnClickListener() {
@@ -52,6 +54,14 @@ public class PersonalPage extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(PersonalPage.this, TrackingPage.class);
+            startActivity(intent);
+        }
+    };
+
+    private View.OnClickListener trackeeButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(PersonalPage.this, TrackeePage.class);
             startActivity(intent);
         }
     };
