@@ -14,13 +14,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/map"
-        android:background="@color/green"
         android:maxHeight="300dp"
         android:maxWidth="500dp"
         android:minHeight="300dp"
         android:minWidth="500dp"
         android:nestedScrollingEnabled="true"
-        android:src="@android:drawable/ic_dialog_map"
+        android:src="@drawable/map"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 

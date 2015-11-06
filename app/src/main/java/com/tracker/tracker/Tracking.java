@@ -43,14 +43,5 @@ public class Tracking extends FragmentActivity implements OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
-    public static class Tracking_page extends Activity {
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_tracking_page);
-
-        }
-
-    }
 }

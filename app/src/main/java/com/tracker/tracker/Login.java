@@ -36,14 +36,5 @@ public class Login extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static class Notification_page extends AppCompatActivity {
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_notification_page);
-
-        }
-
-    }
 }
