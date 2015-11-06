@@ -32,16 +32,16 @@
         android:layout_height="wrap_content"
         android:text="Who You Are Tracking"
         android:id="@+id/tracking_button"
+        android:layout_marginBottom="69dp"
         android:layout_above="@+id/trackers_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="111dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WHO IS TRACKING YOU"
         android:id="@+id/trackers_button"
-        android:layout_marginBottom="183dp"
+        android:layout_marginBottom="180dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

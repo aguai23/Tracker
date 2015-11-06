@@ -7,53 +7,62 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_profile" tools:context="com.tracker.tracker.Profile">
+    tools:showIn="@layout/activity_profile" tools:context="com.tracker.tracker.Profile"
+    android:background="@color/blue">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="name"
-        android:id="@+id/textView4"
-        android:textSize="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="121dp" />
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="e-mail"
-        android:id="@+id/textView5"
-        android:textSize="20dp"
-        android:layout_marginTop="39dp"
-        android:layout_below="@+id/textView4"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="back"
+            android:id="@+id/back"
+             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:id="@+id/name"
+            android:textSize="30dp"
+            android:layout_marginLeft="100dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="phone number"
-        android:id="@+id/textView6"
-        android:textSize="20dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete this content"
-        android:id="@+id/button4"
-        android:layout_below="@+id/textView6"
-        android:layout_alignLeft="@+id/textView6"
-        android:layout_alignStart="@+id/textView6"
-        android:layout_marginTop="56dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="e-mail"
+            android:id="@+id/email"
+            android:textSize="30dp"
+            android:layout_marginLeft="100dp"
+             />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
-        android:id="@+id/button5"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="phone number"
+            android:id="@+id/phone"
+            android:textSize="30dp"
+            android:layout_marginLeft="100dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete this content"
+            android:id="@+id/delete"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/button"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
 </RelativeLayout>
