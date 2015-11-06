@@ -1,17 +1,24 @@
 package com.tracker.tracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class Login extends AppCompatActivity {
+
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        loginButton = (Button) findViewById(R.id.button);
+        loginButton.setOnClickListener(loginButtonListener);
     }
 
     @Override
@@ -35,6 +42,14 @@ public class Login extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private View.OnClickListener loginButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(Login.this, PersonalPage.class);
+            startActivity(intent);
+        }
+    };
 
 
 }

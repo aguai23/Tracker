@@ -18,6 +18,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PersonalPage"
+            android:label="@string/personal_page"
+            android:parentActivityName=".Login" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Login" />
+        </activity>
+        <activity
+            android:name=".Profile"
+            android:label="@string/profile"
+            android:parentActivityName=".PersonalPage" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PersonalPage" />
+        </activity>
+        <activity
+            android:name=".TrackingPage"
+            android:label="@string/tracking_page"
+            android:parentActivityName=".PersonalPage" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PersonalPage" />
+        </activity>
     </application>
 
 </manifest>

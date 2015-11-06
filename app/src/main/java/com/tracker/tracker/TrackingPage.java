@@ -1,8 +1,7 @@
 package com.tracker.tracker;
 
-import android.app.Activity;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,7 +9,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Tracking extends FragmentActivity implements OnMapReadyCallback {
+public class TrackingPage extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
