@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Login"
+            android:name=".ui.Login"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -19,61 +19,67 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Register"
+            android:name=".ui.Register"
             android:label="@string/register"
-            android:parentActivityName=".Login" >
+            android:parentActivityName=".ui.Login" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Login" />
+                android:value=".ui.Login" />
         </activity>
         <activity
-            android:name=".PersonalPage"
+            android:name=".ui.PersonalPage"
             android:label="@string/personal_page"
-            android:parentActivityName=".Login" >
+            android:parentActivityName=".ui.Login" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Login" />
+                android:value=".ui.Login" />
         </activity>
         <activity
-            android:name=".Profile"
+            android:name=".ui.Profile"
             android:label="@string/profile"
-            android:parentActivityName=".PersonalPage" >
+            android:parentActivityName=".ui.PersonalPage" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PersonalPage" />
+                android:value=".ui.PersonalPage" />
         </activity>
         <activity
-            android:name=".TrackingPage"
+            android:name=".ui.TrackingPage"
             android:label="@string/tracking_page"
-            android:parentActivityName=".PersonalPage" >
+            android:parentActivityName=".ui.PersonalPage" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PersonalPage" />
+                android:value=".ui.PersonalPage" />
         </activity>
         <activity
-            android:name=".SpecificLocation"
+            android:name=".ui.SpecificLocation"
             android:label="@string/specific_location"
-            android:parentActivityName=".TrackingPage" >
+            android:parentActivityName=".ui.TrackingPage" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".TrackingPage" />
+                android:value=".ui.TrackingPage" />
         </activity>
         <activity
-            android:name=".TrackeePage"
+            android:name=".ui.TrackeePage"
             android:label="@string/trackee_page"
-            android:parentActivityName=".PersonalPage" >
+            android:parentActivityName=".ui.PersonalPage" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PersonalPage" />
+                android:value=".ui.PersonalPage" />
         </activity>
         <activity
-            android:name=".Notification"
+            android:name=".ui.Notification"
             android:label="@string/notification"
-            android:parentActivityName=".TrackeePage" >
+            android:parentActivityName=".ui.TrackeePage" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".TrackeePage" />
+                android:value=".ui.TrackeePage" />
         </activity>
+
+        <service
+            android:name=".services.local.locationService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
