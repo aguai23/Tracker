@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tracker.tracker" >
+    <supports-screens
+        android:anyDensity="true"
+        android:normalScreens="true"
+        android:largeScreens="true"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        >
         <activity
-            android:name=".ui.Login"
+            android:name=".ui.UI_Login"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -19,60 +24,60 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Register"
+            android:name=".ui.UI_Register"
             android:label="@string/register"
-            android:parentActivityName=".ui.Login" >
+            android:parentActivityName=".ui.UI_Login" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.Login" />
+                android:value=".ui.UI_Login" />
         </activity>
         <activity
-            android:name=".ui.PersonalPage"
+            android:name=".ui.UI_PersonalPage"
             android:label="@string/personal_page"
-            android:parentActivityName=".ui.Login" >
+            android:parentActivityName=".ui.UI_Login" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.Login" />
+                android:value=".ui.UI_Login" />
         </activity>
         <activity
-            android:name=".ui.Profile"
+            android:name=".ui.UI_Profile"
             android:label="@string/profile"
-            android:parentActivityName=".ui.PersonalPage" >
+            android:parentActivityName=".ui.UI_PersonalPage" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.PersonalPage" />
+                android:value=".ui.UI_PersonalPage" />
         </activity>
         <activity
-            android:name=".ui.TrackingPage"
+            android:name=".ui.UI_TrackingPage"
             android:label="@string/tracking_page"
-            android:parentActivityName=".ui.PersonalPage" >
+            android:parentActivityName=".ui.UI_PersonalPage" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.PersonalPage" />
+                android:value=".ui.UI_PersonalPage" />
         </activity>
         <activity
-            android:name=".ui.SpecificLocation"
+            android:name=".ui.UI_SpecificLocation"
             android:label="@string/specific_location"
-            android:parentActivityName=".ui.TrackingPage" >
+            android:parentActivityName=".ui.UI_TrackingPage" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.TrackingPage" />
+                android:value=".ui.UI_TrackingPage" />
         </activity>
         <activity
-            android:name=".ui.TrackeePage"
+            android:name=".ui.UI_TrackeePage"
             android:label="@string/trackee_page"
-            android:parentActivityName=".ui.PersonalPage" >
+            android:parentActivityName=".ui.UI_PersonalPage" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.PersonalPage" />
+                android:value=".ui.UI_PersonalPage" />
         </activity>
         <activity
-            android:name=".ui.Notification"
+            android:name=".ui.UI_Notification"
             android:label="@string/notification"
-            android:parentActivityName=".ui.TrackeePage" >
+            android:parentActivityName=".ui.UI_TrackeePage" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.TrackeePage" />
+                android:value=".ui.UI_TrackeePage" />
         </activity>
 
         <service

@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.tracker.tracker.R;
 
-public class Register extends AppCompatActivity {
+public class UI_Register extends AppCompatActivity {
 
     private Button submitButton;
 
@@ -24,7 +24,7 @@ public class Register extends AppCompatActivity {
     private View.OnClickListener submitButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Register.this, PersonalPage.class);
+            Intent intent = new Intent(UI_Register.this, UI_PersonalPage.class);
             startActivity(intent);
         }
     };

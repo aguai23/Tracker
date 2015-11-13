@@ -10,4 +10,9 @@
     <string name="trackee_page">Trackee</string>
     <string name="notification">Notification</string>
     <string name="specific_location">Specific Location</string>
+    <string name="contact">Contact List</string>
+    <string name="track">Track Contacts</string>
+    <string name="ok">ok</string>
+    <string name="back">Back</string>
+    <string name="hint1">Search Contact Name</string>
 </resources>

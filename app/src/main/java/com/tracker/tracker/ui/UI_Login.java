@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.tracker.tracker.R;
 
-public class Login extends AppCompatActivity {
+public class UI_Login extends AppCompatActivity {
 
     private Button loginButton;
     private Button registerButton;
@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
     private View.OnClickListener loginButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Login.this, PersonalPage.class);
+            Intent intent = new Intent(UI_Login.this, UI_PersonalPage.class);
             startActivity(intent);
         }
     };
@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
     private View.OnClickListener registerButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Login.this, Register.class);
+            Intent intent = new Intent(UI_Login.this, UI_Register.class);
             startActivity(intent);
         }
     };

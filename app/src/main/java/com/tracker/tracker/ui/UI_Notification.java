@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.tracker.tracker.R;
 
-public class Notification extends AppCompatActivity {
+public class UI_Notification extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

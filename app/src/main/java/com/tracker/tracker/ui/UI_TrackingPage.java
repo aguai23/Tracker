@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tracker.tracker.R;
 
-public class TrackingPage extends FragmentActivity implements OnMapReadyCallback {
+public class UI_TrackingPage extends FragmentActivity implements OnMapReadyCallback {
 
     private Button listButton;
 
@@ -52,7 +52,7 @@ public class TrackingPage extends FragmentActivity implements OnMapReadyCallback
     private View.OnClickListener listButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(TrackingPage.this, SpecificLocation.class);
+            Intent intent = new Intent(UI_TrackingPage.this, UI_SpecificLocation.class);
             startActivity(intent);
         }
     };

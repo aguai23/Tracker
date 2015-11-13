@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.tracker.tracker.R;
 
-public class TrackeePage extends AppCompatActivity {
+public class UI_TrackeePage extends AppCompatActivity {
 
     private Button notificationButton;
 
@@ -24,7 +24,7 @@ public class TrackeePage extends AppCompatActivity {
     private View.OnClickListener notificationButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(TrackeePage.this, Notification.class);
+            Intent intent = new Intent(UI_TrackeePage.this, UI_Notification.class);
             startActivity(intent);
         }
     };

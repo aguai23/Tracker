@@ -8,7 +8,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_notification_page"
-    tools:context="com.tracker.tracker.ui.Login.Notification_page"
+    tools:context="com.tracker.tracker.ui.UI_Login.Notification_page"
     android:background="@color/blue">
 
     <TextView

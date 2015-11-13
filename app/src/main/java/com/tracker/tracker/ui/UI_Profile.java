@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.tracker.tracker.R;
 
-public class Profile extends AppCompatActivity {
+public class UI_Profile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

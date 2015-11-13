@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.tracker.tracker.R;
 
-public class Search_contact extends AppCompatActivity {
+public class UI_Search_contact extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

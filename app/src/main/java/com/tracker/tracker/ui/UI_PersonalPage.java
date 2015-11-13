@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.tracker.tracker.R;
 
-public class PersonalPage extends AppCompatActivity {
+public class UI_PersonalPage extends AppCompatActivity {
 
     private Button profileButton;
     private Button logoutButton;
@@ -36,7 +36,7 @@ public class PersonalPage extends AppCompatActivity {
     private View.OnClickListener profileButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(PersonalPage.this, Profile.class);
+            Intent intent = new Intent(UI_PersonalPage.this, UI_Profile.class);
             startActivity(intent);
         }
     };
@@ -44,7 +44,7 @@ public class PersonalPage extends AppCompatActivity {
     private View.OnClickListener logoutButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(PersonalPage.this, Login.class);
+            Intent intent = new Intent(UI_PersonalPage.this, UI_Login.class);
             startActivity(intent);
         }
     };
@@ -52,7 +52,7 @@ public class PersonalPage extends AppCompatActivity {
     private View.OnClickListener trackingButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(PersonalPage.this, TrackingPage.class);
+            Intent intent = new Intent(UI_PersonalPage.this, UI_TrackingPage.class);
             startActivity(intent);
         }
     };
@@ -60,7 +60,7 @@ public class PersonalPage extends AppCompatActivity {
     private View.OnClickListener trackeeButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(PersonalPage.this, TrackeePage.class);
+            Intent intent = new Intent(UI_PersonalPage.this, UI_TrackeePage.class);
             startActivity(intent);
         }
     };
