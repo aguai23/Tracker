@@ -49,6 +49,11 @@
             android:id="@+id/delete"
             android:layout_marginLeft="100dp"
             android:background="@drawable/button"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="return"
+            android:id="@+id/back"/>
 
 
 

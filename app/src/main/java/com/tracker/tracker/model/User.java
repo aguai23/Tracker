@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Class represents all the information
  * about the logged in user
  */
-public class User {
+public class User implements User_interface {
     private PersonalInfo info;
     private ArrayList<PersonalInfo> following; // users you are tracking
     private ArrayList<PersonalInfo> followers; // users tracking you
@@ -54,13 +54,13 @@ public class User {
 
     }
 
-    PersonalInfo search_user(String phNumber){
+    public PersonalInfo search_user(String phNumber){
         PersonalInfo info = new PersonalInfo();
 
         return info;
     }
 
-    ArrayList<Pair<Location, Timestamp>> get_location(Timestamp from, Timestamp to){
+    public ArrayList<Pair<Location, Timestamp>> get_location(Timestamp from, Timestamp to){
         ArrayList<Pair<Location, Timestamp>> locations = null;
 
         return locations;

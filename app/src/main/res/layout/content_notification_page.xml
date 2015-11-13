@@ -17,8 +17,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Request"
         android:id="@+id/textView"
-        android:layout_below="@+id/button4"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="return"
+        android:id="@+id/back"/>
 
     <LinearLayout
         android:layout_width="fill_parent"

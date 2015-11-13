@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Database layer between Model and data source
  */
-public class DbOperation {
+public class DbOperation extends DbFunction{
     public boolean create_user(PersonalInfo userInfo){
 
         return false;
