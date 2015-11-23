@@ -9,7 +9,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_search_contact"
     tools:context="com.tracker.tracker.ui.UI_Search_contact"
-    android:background="@color/blue">
+    android:background="@drawable/background1">
 
     <Button
         android:layout_width="wrap_content"

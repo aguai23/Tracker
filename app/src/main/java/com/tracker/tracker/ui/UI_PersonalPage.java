@@ -1,5 +1,6 @@
 package com.tracker.tracker.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,7 @@ import android.widget.Button;
 
 import com.tracker.tracker.R;
 
-public class UI_PersonalPage extends AppCompatActivity {
+public class UI_PersonalPage extends Activity {
 
     private Button profileButton;
     private Button logoutButton;
@@ -36,7 +37,7 @@ public class UI_PersonalPage extends AppCompatActivity {
     private View.OnClickListener profileButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(UI_PersonalPage.this, UI_Profile.class);
+            Intent intent = new Intent(UI_PersonalPage.this, UI_UserProfile.class);
             startActivity(intent);
         }
     };

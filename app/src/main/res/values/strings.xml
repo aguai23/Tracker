@@ -15,4 +15,5 @@
     <string name="ok">ok</string>
     <string name="back">Back</string>
     <string name="hint1">Search Contact Name</string>
+    <string name="title_activity_ui__user_profile">UI_UserProfile</string>
 </resources>

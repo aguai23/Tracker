@@ -10,18 +10,6 @@
     tools:showIn="@layout/activity_tracking_page" tools:context="com.tracker.tracker.ui.UI_TrackingPage"
     android:background="@color/blue">
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/map"
-        android:maxHeight="300dp"
-        android:maxWidth="500dp"
-        android:minHeight="300dp"
-        android:minWidth="500dp"
-        android:nestedScrollingEnabled="true"
-        android:src="@drawable/map"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"

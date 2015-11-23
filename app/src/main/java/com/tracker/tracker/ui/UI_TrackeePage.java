@@ -1,5 +1,6 @@
 package com.tracker.tracker.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,7 @@ import android.widget.Button;
 
 import com.tracker.tracker.R;
 
-public class UI_TrackeePage extends AppCompatActivity {
+public class UI_TrackeePage extends Activity {
 
     private Button notificationButton;
 
