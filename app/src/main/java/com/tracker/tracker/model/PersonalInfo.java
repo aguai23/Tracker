@@ -4,49 +4,49 @@ package com.tracker.tracker.model;
  * Class contains profile information of user
  */
 public class PersonalInfo {
-    private String userName;
+    private String username;
     private String name;
-    private String phNumber;
+    private String phone;
     private String email;
 
     public PersonalInfo() {
     }
 
-    public PersonalInfo(String userName, String name, String phNumber, String email) {
-        this.userName = userName;
+    public PersonalInfo(String username, String name, String phone, String email) {
+        this.username = username;
         this.name = name;
-        this.phNumber = phNumber;
+        this.phone = phone;
 
         this.email = email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setPhNumber(String phNumber) {
-        this.phNumber = phNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getUserName() {
+    public String getUsername() {
 
-        return userName;
+        return username;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getPhNumber() {
-        return phNumber;
+    public String getPhone() {
+        return phone;
     }
 
     public String getEmail() {

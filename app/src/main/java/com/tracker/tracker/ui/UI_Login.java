@@ -8,13 +8,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.tracker.tracker.R;
+import com.tracker.tracker.exception.InvalidAccountException;
+import com.tracker.tracker.exception.NoInputException;
+import com.tracker.tracker.exception.NoInputException;
 
 public class UI_Login extends Activity {
 
     private Button loginButton;
     private Button registerButton;
+    private EditText username;
+    private EditText password;
+    private TextView error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +34,13 @@ public class UI_Login extends Activity {
 
         registerButton = (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(registerButtonListener);
+
+        username=(EditText)findViewById(R.id.user_name);
+        password=(EditText)findViewById(R.id.password);
+
+        error=(TextView)findViewById(R.id.error);
+
+
     }
 
     @Override
@@ -53,14 +68,35 @@ public class UI_Login extends Activity {
     private View.OnClickListener loginButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(UI_Login.this, UI_PersonalPage.class);
-            startActivity(intent);
+            //check the validity of password and user name here
+            String user=username.getText().toString();
+            String pass=password.getText().toString();
+
+            boolean valid=true;
+            try {
+                if (user.length() == 0 || pass.length() == 0) {
+                    throw new NoInputException();
+                }
+
+                if (valid) {
+                    Intent intent = new Intent(UI_Login.this, UI_PersonalPage.class);
+                    startActivity(intent);
+                } else {
+                    throw new InvalidAccountException();
+
+                }
+            }
+            catch (Exception e){
+                error.setText(e.getMessage());
+            }
         }
     };
 
     private View.OnClickListener registerButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            //just navigate to register page,no more actions needed
             Intent intent = new Intent(UI_Login.this, UI_Register.class);
             startActivity(intent);
         }
