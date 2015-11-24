@@ -21,7 +21,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/search_name"
+        android:id="@+id/phone"
 
         android:hint="@string/hint1"
         android:textColorHint="@color/orange"
@@ -31,16 +31,26 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         />
-
-    <SearchView
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@+id/phone"
+        android:layout_marginTop="50dp"
+        android:id="@+id/search"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/search"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/searchView"
-        android:queryHint="Search Name"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        android:layout_alignBottom="@+id/search_name"
-        android:layout_toRightOf="@+id/search_name"
-        android:layout_toEndOf="@+id/search_name" />
+        android:layout_below="@+id/phone"
+        android:text="search result"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignRight="@+id/phone"
+        android:layout_alignLeft="@+id/phone"
+        android:clickable="true"
+        android:textColor="#f8f5f5"
+        android:id="@+id/result"/>
+
 
 </RelativeLayout>

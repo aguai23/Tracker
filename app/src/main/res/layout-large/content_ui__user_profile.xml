@@ -29,25 +29,14 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="User name"
-            android:id="@+id/user_name"
+            android:id="@+id/username"
 
             android:layout_marginTop="57dp"
             android:textColor="#f8f5f5"
             android:textSize="20dp"
             android:layout_marginLeft="180dp"
             />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/password"
-            android:password="true"
-            android:hint="Password"
-            android:layout_gravity="center"
-            android:textColor="#f8f5f5"
-            android:textColorHint="#f8f5f5"
-            android:layout_marginLeft="0dp"/>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

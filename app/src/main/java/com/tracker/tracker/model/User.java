@@ -3,7 +3,7 @@ package com.tracker.tracker.model;
 import android.location.Location;
 import android.util.Pair;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -62,7 +62,7 @@ public class User implements User_interface {
         return true;
     }
 
-    public PersonalInfo search_user(String phNumber){
+    public PersonalInfo search_user(String phone){
         PersonalInfo info = new PersonalInfo();
 
         return info;
@@ -73,4 +73,28 @@ public class User implements User_interface {
 
         return locations;
     }
+
+    public void updateInfo(String name,String phone,String email){
+
+    }
+
+    public void deleteFollowing(String name){
+
+    }
+
+    public void deleteFollowers(String name){
+
+    }
+
+    public Pair<Location,Timestamp> getLocation(PersonalInfo contact){
+        Location location=null;
+        Timestamp time=null;
+        Pair<Location,Timestamp>pair=new Pair<Location,Timestamp>(location,time);
+        return pair;
+    }
+
+    public void register(String username,String password,String name,String phone,String email){
+
+    }
+
 }

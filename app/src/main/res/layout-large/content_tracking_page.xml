@@ -9,12 +9,21 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_tracking_page" tools:context="com.tracker.tracker.ui.UI_TrackingPage"
     android:background="@drawable/background1">
+    <Spinner
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:background="@drawable/down"
+        android:layout_below="@+id/title"
+        android:layout_toLeftOf="@+id/listButton"
+        android:layout_marginTop="30dp"
+        android:id="@+id/list"
+        ></Spinner>
 
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/contact"
+        android:text="View"
         android:id="@+id/listButton"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"

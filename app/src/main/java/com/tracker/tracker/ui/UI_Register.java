@@ -21,6 +21,7 @@ public class UI_Register extends Activity {
     private EditText email;
     private User thisUser;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,7 @@ public class UI_Register extends Activity {
 
                 }
                 if(serverValid==true && inputValid==true){
+                    thisUser.register(user,pass,nameString,phoneString,emailString);
                     Intent intent = new Intent(UI_Register.this, UI_PersonalPage.class);
                     startActivity(intent);
                 }

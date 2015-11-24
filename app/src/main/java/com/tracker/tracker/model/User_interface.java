@@ -3,7 +3,7 @@ package com.tracker.tracker.model;
 import android.location.Location;
 import android.util.Pair;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
