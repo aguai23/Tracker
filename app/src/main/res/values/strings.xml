@@ -16,4 +16,5 @@
     <string name="back">Back</string>
     <string name="hint1">Search Contact Name</string>
     <string name="title_activity_ui__user_profile">UI_UserProfile</string>
+    <string name="Register">REGISTER</string>
 </resources>

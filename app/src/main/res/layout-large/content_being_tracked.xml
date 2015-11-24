@@ -22,60 +22,15 @@
             android:text="Contacts tracking you"
             android:textColor="#faf8f8"
             android:textSize="30dp"/>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contact 1"
-                android:textSize="20dp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View profile"
-                android:textSize="20dp"
-                android:layout_marginLeft="20dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contact 2"
-                android:textSize="20dp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View profile"
-                android:textSize="20dp"
-                android:layout_marginLeft="20dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contact 3"
-                android:textSize="20dp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View profile"
-                android:textSize="20dp"
-                android:layout_marginLeft="20dp"/>
-        </LinearLayout>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/notificationButton"
             android:text="Notification"/>
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contactlist"></ListView>
+
     </LinearLayout>
 </RelativeLayout>

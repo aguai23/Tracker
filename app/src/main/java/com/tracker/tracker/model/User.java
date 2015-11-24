@@ -54,6 +54,14 @@ public class User implements User_interface {
 
     }
 
+    public boolean checkLogin(String username,String password){
+        return true;
+    }
+
+    public boolean checkRegister(String username,String password,String name,String phone,String email){
+        return true;
+    }
+
     public PersonalInfo search_user(String phNumber){
         PersonalInfo info = new PersonalInfo();
 

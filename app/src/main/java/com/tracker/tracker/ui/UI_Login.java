@@ -15,6 +15,7 @@ import com.tracker.tracker.R;
 import com.tracker.tracker.exception.InvalidAccountException;
 import com.tracker.tracker.exception.NoInputException;
 import com.tracker.tracker.exception.NoInputException;
+import com.tracker.tracker.model.User;
 
 public class UI_Login extends Activity {
 
@@ -23,6 +24,7 @@ public class UI_Login extends Activity {
     private EditText username;
     private EditText password;
     private TextView error;
+    private User thisUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class UI_Login extends Activity {
         password=(EditText)findViewById(R.id.password);
 
         error=(TextView)findViewById(R.id.error);
+
+        thisUser=new User();
 
 
     }
@@ -72,7 +76,7 @@ public class UI_Login extends Activity {
             String user=username.getText().toString();
             String pass=password.getText().toString();
 
-            boolean valid=true;
+            boolean valid=thisUser.checkLogin(user,pass);
             try {
                 if (user.length() == 0 || pass.length() == 0) {
                     throw new NoInputException();
