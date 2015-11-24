@@ -37,7 +37,7 @@ public class UI_Login extends Activity {
         registerButton = (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(registerButtonListener);
 
-        username=(EditText)findViewById(R.id.user_name);
+        username=(EditText)findViewById(R.id.username);
         password=(EditText)findViewById(R.id.password);
 
         error=(TextView)findViewById(R.id.error);

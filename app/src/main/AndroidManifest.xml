@@ -7,6 +7,23 @@
         android:largeScreens="true"
         android:normalScreens="true" />
 
+    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+    <uses-library android:name="com.google.android.maps" />
+
+    <permission
+        android:name="com.vogella.android.locationapi.maps.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-permission android:name="com.vogella.android.locationapi.maps.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -91,6 +108,10 @@
             android:label="@string/title_activity_ui__user_profile"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAl_TPfioJCBRuLlG4ZnfGL78gJO3Nmf6g" />
     </application>
 
 </manifest>

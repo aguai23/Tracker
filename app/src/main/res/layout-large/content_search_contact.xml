@@ -12,11 +12,11 @@
     android:background="@drawable/background1">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/back"
-        android:width="40dp" />
+        android:width="40dp"
+        android:background="@drawable/back"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -24,6 +24,7 @@
         android:id="@+id/search_name"
 
         android:hint="@string/hint1"
+        android:textColorHint="@color/orange"
         android:textAlignment="center"
         android:textColor="#0c0c0c"
         android:textStyle="bold"

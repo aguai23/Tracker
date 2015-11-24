@@ -17,7 +17,15 @@
         android:text="@string/contact"
         android:id="@+id/listButton"
         android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button1"
+        android:layout_below="@+id/title"/>
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/back"
+        android:width="40dp"
+        android:background="@drawable/back"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,5 +33,13 @@
         android:text="@string/track"
         android:id="@+id/title"
         android:textSize="30dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#f8f5f5"/>
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        class="com.google.android.gms.maps.MapFragment"
+        android:layout_below="@+id/listButton"
+        android:layout_marginTop="30dp"/>
 </RelativeLayout>
