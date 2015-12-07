@@ -20,12 +20,14 @@ public class UI_Register extends Activity {
     private EditText phone;
     private EditText email;
     private User thisUser;
+    private Button back;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        thisUser=new User();
 
         submitButton = (Button) findViewById(R.id.submit_button);
         submitButton.setOnClickListener(submitButtonListener);
@@ -35,6 +37,15 @@ public class UI_Register extends Activity {
         name=(EditText)findViewById(R.id.name);
         phone=(EditText)findViewById(R.id.phone);
         email=(EditText)findViewById(R.id.email);
+
+        back=(Button)findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(UI_Register.this,UI_Login.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private View.OnClickListener submitButtonListener = new View.OnClickListener() {
@@ -58,7 +69,13 @@ public class UI_Register extends Activity {
                 }
                 if(serverValid==true && inputValid==true){
                     thisUser.register(user,pass,nameString,phoneString,emailString);
+                    thisUser.setUsername(user);
+                    thisUser.setName(nameString);
+                    thisUser.setPhone(phoneString);
+                    thisUser.setEmail(emailString);
+
                     Intent intent = new Intent(UI_Register.this, UI_PersonalPage.class);
+                    intent.putExtra("user",thisUser);
                     startActivity(intent);
                 }
             }

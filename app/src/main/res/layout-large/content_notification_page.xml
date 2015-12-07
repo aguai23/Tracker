@@ -11,6 +11,12 @@
     tools:context="com.tracker.tracker.ui.UI_Login.Notification_page"
     android:background="@drawable/background1"
     >
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/back"
+        android:width="40dp"
+        android:background="@drawable/back"/>
 
     <TextView
         android:layout_width="wrap_content"

@@ -7,9 +7,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_ui__user_profile"
-    tools:context="com.tracker.tracker.ui.UI_UserProfile"
+    tools:showIn="@layout/activity_add_contact"
+    tools:context="com.tracker.tracker.ui.Add_contact"
     android:background="@drawable/background1">
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/back"
+        android:width="40dp"
+        android:background="@drawable/back"/>
+
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -29,15 +38,14 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="User name"
-            android:id="@+id/username"
-
+            android:id="@+id/user_name"
             android:layout_marginTop="57dp"
             android:textColor="#f8f5f5"
             android:textSize="20dp"
-            android:layout_marginLeft="180dp"
+            android:layout_gravity="center"
             />
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/name"
@@ -46,8 +54,9 @@
             android:hint="Name"
             android:layout_gravity="center"
             android:textColor="#f8f5f5"
-            android:textColorHint="#f8f5f5"/>
-        <EditText
+            android:textColorHint="#f8f5f5"
+            android:textSize="20dp"/>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="phone"
@@ -58,8 +67,9 @@
             android:textColor="#f8f5f5"
             android:layout_gravity="center"
             android:textColorHint="#f8f5f5"
-            android:elevation="5dp"/>
-        <EditText
+            android:elevation="5dp"
+            android:textSize="20dp"/>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -69,13 +79,17 @@
             android:layout_below="@+id/email"
             android:textColor="#f8f5f5"
             android:layout_gravity="center"
-            android:textColorHint="#f8f5f5"/>
+            android:textColorHint="#f8f5f5"
+            android:textSize="20dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="save"
-            android:id="@+id/save"
+            android:text="Add this contact"
+            android:id="@+id/delete"
             android:layout_marginTop="43dp"
+            android:layout_below="@+id/add"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:background="@drawable/button"
             android:layout_gravity="center"/>
     </LinearLayout>

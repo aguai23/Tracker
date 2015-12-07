@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.tracker.tracker.R;
+import com.tracker.tracker.model.User;
 
 public class UI_PersonalPage extends Activity {
 
@@ -15,6 +16,7 @@ public class UI_PersonalPage extends Activity {
     private Button logoutButton;
     private Button trackingButton;
     private Button trackeeButton;
+    private User thisUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +34,18 @@ public class UI_PersonalPage extends Activity {
 
         trackeeButton = (Button) findViewById(R.id.trackee_button);
         trackeeButton.setOnClickListener(trackeeButtonListener);
+
+        Intent intent=getIntent();
+        thisUser=(User)intent.getSerializableExtra("user");
+
     }
 
     private View.OnClickListener profileButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
             Intent intent = new Intent(UI_PersonalPage.this, UI_UserProfile.class);
+            intent.putExtra("user",thisUser);
             startActivity(intent);
         }
     };
@@ -54,6 +62,7 @@ public class UI_PersonalPage extends Activity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(UI_PersonalPage.this, UI_TrackingPage.class);
+            intent.putExtra("user",thisUser);
             startActivity(intent);
         }
     };
@@ -62,6 +71,7 @@ public class UI_PersonalPage extends Activity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(UI_PersonalPage.this, UI_TrackeePage.class);
+            intent.putExtra("user",thisUser);
             startActivity(intent);
         }
     };

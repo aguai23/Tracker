@@ -17,4 +17,5 @@
     <string name="hint1">Search Contact Phone</string>
     <string name="title_activity_ui__user_profile">UI_UserProfile</string>
     <string name="Register">REGISTER</string>
+    <string name="title_activity_add_contact">Add_contact</string>
 </resources>

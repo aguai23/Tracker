@@ -47,27 +47,7 @@ public class UI_Login extends Activity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private View.OnClickListener loginButtonListener = new View.OnClickListener() {
         @Override
@@ -76,14 +56,28 @@ public class UI_Login extends Activity {
             String user=username.getText().toString();
             String pass=password.getText().toString();
 
-            boolean valid=thisUser.checkLogin(user,pass);
+            boolean valid=thisUser.checkLogin(user, pass);
             try {
                 if (user.length() == 0 || pass.length() == 0) {
                     throw new NoInputException();
                 }
 
                 if (valid) {
+                    thisUser.setUsername("user1");
+                    thisUser.setName("me");
+                    thisUser.setEmail("yyiiu@gmail");
+                    thisUser.setPhone("33322232323");
+                    thisUser.addFollowers("user2", "you3", "kdfjk@gmail.com", "34343");
+                    thisUser.addFollowers("user3", "you2", "kdfjk@gmail.com", "34343");
+                    thisUser.addFollowers("user4", "you1", "kdfjk@gmail.com", "34343");
+                    thisUser.addFollowing("user3", "you1", "djkf@gmail.com", "2232");
+                    thisUser.addFollowing("user2","you2", "djkf@gmail.com", "2232");
+                    thisUser.addFollowing("user5","you3", "djkf@gmail.com", "2232");
+                    thisUser.addPending("user3", "you", "djkf@gmail.com", "2232");
+                    thisUser.addPending("user3","you2","djkf@gmail.com","2232");
+                    thisUser.addPending("user3","you3","djkf@gmail.com","2232");
                     Intent intent = new Intent(UI_Login.this, UI_PersonalPage.class);
+                    intent.putExtra("user",thisUser);
                     startActivity(intent);
                 } else {
                     throw new InvalidAccountException();

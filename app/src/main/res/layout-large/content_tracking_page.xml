@@ -11,11 +11,11 @@
     android:background="@drawable/background1">
     <Spinner
         android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:background="@drawable/down"
+        android:layout_height="50dp"
         android:layout_below="@+id/title"
         android:layout_toLeftOf="@+id/listButton"
         android:layout_marginTop="30dp"
+        android:background="#f8f5f5"
         android:id="@+id/list"
         ></Spinner>
 
@@ -28,14 +28,46 @@
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/button1"
-        android:layout_below="@+id/title"/>
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="50dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Satellite"
+        android:id="@+id/satellite"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button1"
+        android:layout_below="@+id/title"
+        android:layout_toRightOf="@+id/listButton"
+        android:layout_marginLeft="50dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Normal"
+        android:id="@+id/normal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button1"
+        android:layout_below="@+id/title"
+        android:layout_toRightOf="@+id/satellite"
+        android:layout_marginLeft="20dp"
+        />
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/back"
         android:width="40dp"
         android:background="@drawable/back"/>
-
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/search"
+        android:width="40dp"
+        android:layout_below="@+id/back"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/search"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,7 +79,7 @@
     <fragment
         android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="500dp"
         class="com.google.android.gms.maps.MapFragment"
         android:layout_below="@+id/listButton"
         android:layout_marginTop="30dp"/>

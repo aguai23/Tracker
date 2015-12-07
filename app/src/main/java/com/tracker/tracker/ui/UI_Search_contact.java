@@ -18,21 +18,25 @@ public class UI_Search_contact extends Activity {
     private TextView result;
     private Button search;
     private EditText phone;
-    User user;
+    private User thisUser;
+    private Button back;
+    private User searchInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_contact);
-
+        Intent intent=getIntent();
+        thisUser=(User)intent.getSerializableExtra("user");
         phone=(EditText)findViewById(R.id.phone);
 
-        Button back=(Button)findViewById(R.id.back);
+        back=(Button)findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(UI_Search_contact.this, UI_PersonalPage.class);
+                Intent intent = new Intent(UI_Search_contact.this, UI_TrackingPage.class);
+                intent.putExtra("user",thisUser);
                 startActivity(intent);
             }
         });
@@ -41,6 +45,13 @@ public class UI_Search_contact extends Activity {
         result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(searchInfo!=null) {
+                    Intent intent = new Intent(UI_Search_contact.this, Add_contact.class);
+                    intent.putExtra("user", thisUser);
+                    intent.putExtra("search", searchInfo);
+                    startActivity(intent);
+                }
+
 
             }
         });
@@ -51,8 +62,11 @@ public class UI_Search_contact extends Activity {
             @Override
             public void onClick(View v) {
                 String phoneString=phone.getText().toString();
-                PersonalInfo searchInfo=user.search_user(phoneString);
-                result.setText(searchInfo.getName());
+                searchInfo=thisUser.search_user(phoneString);
+                if(searchInfo==null)
+                    result.setText("no result");
+                else
+                    result.setText(searchInfo.getName());
             }
         });
 

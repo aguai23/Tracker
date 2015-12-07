@@ -1,6 +1,7 @@
 package com.tracker.tracker.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,31 +18,36 @@ import com.tracker.tracker.model.User;
 
 public class UI_UserProfile extends Activity {
 
-    private User user;
+    private User thisUser;
     private TextView username;
     private EditText name;
     private EditText phone;
     private EditText email;
     private Button save;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ui__user_profile);
-
+        Intent intent=getIntent();
+        thisUser=(User)intent.getSerializableExtra("user");
         name=(EditText)findViewById(R.id.name);
         phone=(EditText)findViewById(R.id.name);
         email=(EditText)findViewById(R.id.email);
         username=(TextView)findViewById(R.id.username);
 
-        PersonalInfo info=user.getInfo();
+
 
         //populate the view with data in the user object
-        name.setText(info.getName());
-        phone.setText(info.getPhone());
-        email.setText(info.getEmail());
-        username.setText(info.getUsername());
+        name.setText(thisUser.getName());
+        phone.setText(thisUser.getPhone());
+        email.setText(thisUser.getEmail());
+        username.setText(thisUser.getUsername());
 
+
+        save=(Button)findViewById(R.id.save);
+        save.setOnClickListener(saveListener);
 
     }
 
@@ -51,8 +57,11 @@ public class UI_UserProfile extends Activity {
             String nameString=name.getText().toString();
             String phoneString=phone.getText().toString();
             String emailString=email.getText().toString();
-            user.updateInfo(nameString,phoneString,emailString);
+            thisUser.updateInfo(nameString, phoneString, emailString);
 
+            Intent intent=new Intent(UI_UserProfile.this,UI_PersonalPage.class);
+            intent.putExtra("user",thisUser);
+            startActivity(intent);
         }
     };
 

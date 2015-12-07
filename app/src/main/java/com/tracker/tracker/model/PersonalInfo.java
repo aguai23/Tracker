@@ -1,9 +1,11 @@
 package com.tracker.tracker.model;
 
+import java.io.Serializable;
+
 /**
  * Class contains profile information of user
  */
-public class PersonalInfo {
+public class PersonalInfo implements Serializable{
     private String username;
     private String name;
     private String phone;
@@ -37,7 +39,6 @@ public class PersonalInfo {
     }
 
     public String getUsername() {
-
         return username;
     }
 
