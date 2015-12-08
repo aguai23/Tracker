@@ -3,6 +3,9 @@ package com.tracker.tracker.model;
 import android.location.Location;
 import android.util.Pair;
 
+import com.tracker.tracker.dbLayout.DbFunction;
+import com.tracker.tracker.dbLayout.DbOperation;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -16,13 +19,16 @@ public class User implements User_interface,Serializable {
     private ArrayList<PersonalInfo> following; // users you are tracking
     private ArrayList<PersonalInfo> followers; // users tracking you
     private ArrayList<PersonalInfo> pendingRequests; // request waiting for your approval
+    private DbOperation db;
 
-    public User(){
+    public User(String uname, String pwd){
         this.info=new PersonalInfo();
         following=new ArrayList<>();
         followers=new ArrayList<>();
         pendingRequests=new ArrayList<>();
+        db = new DbOperation();
 
+        this.info = db.login_user(uname, pwd);
     }
 
     public User(String username,String name,String phone,String email) {
@@ -64,147 +70,69 @@ public class User implements User_interface,Serializable {
         info.setEmail(email);
     }
 
-    public int getFollowingSize(){
-        return this.following.size();
-    }
-    public String getFollowingUsername(int i){
-        PersonalInfo contact=following.get(i);
-        return contact.getUsername();
+    public void addFollowing(String username){
+        //PersonalInfo contact=new PersonalInfo(username,name,phone,email);
+        //this.following.add(contact);
     }
 
-    public String getFollowingName(int i){
-        PersonalInfo contact=following.get(i);
-        return contact.getName();
+    public void addFollowers(String username){
+        //PersonalInfo contact=new PersonalInfo(username,name,phone,email);
+        //this.followers.add(contact);
     }
 
-    public String getFollowingPhone(int i){
-        PersonalInfo contact=following.get(i);
-        return contact.getPhone();
+    public void addPending(String username){
+        //PersonalInfo contact=new PersonalInfo(username,name,phone,email);
+        //this.pendingRequests.add(contact);
     }
-
-    public String getFollowingEmail(int i){
-        PersonalInfo contact=following.get(i);
-        return contact.getEmail();
-    }
-    public int getFollowerSize(){
-        return this.followers.size();
-    }
-    public String getFollowerUsername(int i){
-        PersonalInfo contact=followers.get(i);
-        return contact.getUsername();
-    }
-
-    public String getFollowergName(int i){
-        PersonalInfo contact=followers.get(i);
-        return contact.getName();
-    }
-
-    public String getFollowerPhone(int i){
-        PersonalInfo contact=followers.get(i);
-        return contact.getPhone();
-    }
-
-    public String getFollowerEmail(int i){
-        PersonalInfo contact=followers.get(i);
-        return contact.getEmail();
-    }
-
-    public int getPendingSize(){
-        return this.pendingRequests.size();
-    }
-    public String getPendingUsername(int i){
-        PersonalInfo contact=pendingRequests.get(i);
-        return contact.getUsername();
-    }
-
-    public String getPendingName(int i){
-        PersonalInfo contact=pendingRequests.get(i);
-        return contact.getName();
-    }
-
-    public String getPendingPhone(int i){
-        PersonalInfo contact=pendingRequests.get(i);
-        return contact.getPhone();
-    }
-
-    public String getPendingEmail(int i){
-        PersonalInfo contact=pendingRequests.get(i);
-        return contact.getEmail();
-    }
-
-    public void addFollowing(String username,String name,String phone,String email){
-        PersonalInfo contact=new PersonalInfo(username,name,phone,email);
-        this.following.add(contact);
-    }
-
-    public void addFollowers(String username,String name,String phone,String email){
-        PersonalInfo contact=new PersonalInfo(username,name,phone,email);
-        this.followers.add(contact);
-    }
-
-    public void addPending(String username,String name,String phone,String email){
-        PersonalInfo contact=new PersonalInfo(username,name,phone,email);
-        this.pendingRequests.add(contact);
-    }
-
-
 
     public void send_Request(PersonalInfo user){
-
     }
 
-    public boolean checkLogin(String username,String password){
-        return true;
+    //Authenticate user logging in
+    public boolean checkLogin(){
+        return this.info != null;
     }
 
     public boolean checkRegister(String username,String password,String name,String phone,String email){
         return true;
     }
 
-    public User search_user(String phone){
+    public PersonalInfo search_user(String phone){
         return null;
     }
 
-    public ArrayList<Pair<Location, Timestamp>> get_location(Timestamp from, Timestamp to){
+    public PersonalInfo get_user(String uname){
+
+        return null;
+    }
+
+    public ArrayList<Pair<Location, Timestamp>> get_location(String uname){
         ArrayList<Pair<Location, Timestamp>> locations = null;
 
         return locations;
     }
 
     public void updateInfo(String name,String phone,String email){
-
     }
 
     public void deleteFollowing(String name){
-
     }
 
     public void deleteFollowers(String name){
-
     }
 
     public void acceptRequest(int position){
         this.pendingRequests.remove(position);
-
     }
 
     public void rejectRequest(int position){
         this.pendingRequests.remove(position);
     }
 
-    public Pair<Location,Timestamp> getLocation(PersonalInfo contact){
-        Location location=null;
-        Timestamp time=null;
-        Pair<Location,Timestamp>pair=new Pair<Location,Timestamp>(location,time);
-        return pair;
-    }
-
     public void register(String username,String password,String name,String phone,String email){
-
     }
 
     public void addContact(String name){
 
     }
-
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public interface User_interface {
 
-    User search_user(String phNumber);
+    PersonalInfo search_user(String phNumber);
 
-    ArrayList<Pair<Location, Timestamp>> get_location(Timestamp from, Timestamp to);
+    ArrayList<Pair<Location, Timestamp>> get_location(String uname);
 }
