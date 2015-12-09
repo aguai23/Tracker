@@ -6,7 +6,7 @@ package com.tracker.tracker.services.remote;
  */
 public class webRequest {
 
-    enum REQUEST_TYPE{
+    public enum REQUEST_TYPE{
         SEND_LOCATION
     }
 

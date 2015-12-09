@@ -16,28 +16,39 @@
         android:text="Tracker"
         android:id="@+id/textView3"
         android:textSize="40dp"
-        android:textColor="@color/orange"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#f8f6f6" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/red"
+        android:id="@+id/error"
+        />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_marginTop="150dp"
-        android:id="@+id/layout1">
+        android:id="@+id/layout1"
+        android:layout_centerHorizontal="true">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="username"
             android:id="@+id/textView"
-            android:textSize="15dp"
-        />
+            android:textSize="20dp"
+            android:textColor="#f8f5f5"
+            android:layout_marginLeft="100dp"/>
 
         <EditText
             android:id="@+id/username"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:hint="@string/hint_login_username"
+            android:textColorHint="@color/orange"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"/>
 
@@ -56,9 +67,12 @@
             android:layout_toLeftOf="@+id/password"
             android:layout_alignTop="@+id/password"
             android:layout_above="@+id/button"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:textColor="#faf8f8"
+            android:layout_marginLeft="100dp"
+            />
 
 
         <EditText
@@ -68,8 +82,8 @@
             android:layout_centerHorizontal="true"
             android:inputType="textPersonName"
             android:layout_below="@+id/username"
-            android:hint="@string/hint_login_password"
             android:textSize="20dp"
+            android:textColorHint="@color/orange"
             android:layout_marginLeft="20dp"/>
 
     </LinearLayout>

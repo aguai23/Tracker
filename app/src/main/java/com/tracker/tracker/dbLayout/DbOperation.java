@@ -38,7 +38,7 @@ public class DbOperation extends DbFunction{
             obj.put(name, userInfo.getName());
             obj.put(password, password);
 
-            remote.send_request(obj, webRequest.REQUEST_TYPE.ADD_USER);
+            //remote.send_request(obj, webRequest.REQUEST_TYPE.ADD_USER);
 
         } catch (JSONException e) {
             e.printStackTrace();

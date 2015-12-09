@@ -42,7 +42,6 @@ public class UI_Login extends Activity {
 
         error=(TextView)findViewById(R.id.error);
 
-        thisUser=new User();
 
 
     }
@@ -56,26 +55,22 @@ public class UI_Login extends Activity {
             String user=username.getText().toString();
             String pass=password.getText().toString();
 
-            boolean valid=thisUser.checkLogin(user, pass);
+
             try {
                 if (user.length() == 0 || pass.length() == 0) {
                     throw new NoInputException();
                 }
+
+                thisUser=new User(user,pass);
+
+                boolean valid=thisUser.checkLogin(user, pass);
 
                 if (valid) {
                     thisUser.setUsername("user1");
                     thisUser.setName("me");
                     thisUser.setEmail("yyiiu@gmail");
                     thisUser.setPhone("33322232323");
-                    thisUser.addFollowers("user2", "you3", "kdfjk@gmail.com", "34343");
-                    thisUser.addFollowers("user3", "you2", "kdfjk@gmail.com", "34343");
-                    thisUser.addFollowers("user4", "you1", "kdfjk@gmail.com", "34343");
-                    thisUser.addFollowing("user3", "you1", "djkf@gmail.com", "2232");
-                    thisUser.addFollowing("user2","you2", "djkf@gmail.com", "2232");
-                    thisUser.addFollowing("user5","you3", "djkf@gmail.com", "2232");
-                    thisUser.addPending("user3", "you", "djkf@gmail.com", "2232");
-                    thisUser.addPending("user3","you2","djkf@gmail.com","2232");
-                    thisUser.addPending("user3","you3","djkf@gmail.com","2232");
+
                     Intent intent = new Intent(UI_Login.this, UI_PersonalPage.class);
                     intent.putExtra("user",thisUser);
                     startActivity(intent);

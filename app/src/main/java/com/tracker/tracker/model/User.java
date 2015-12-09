@@ -3,29 +3,23 @@ package com.tracker.tracker.model;
 import android.location.Location;
 import android.util.Pair;
 
-import com.tracker.tracker.dbLayout.DbFunction;
 import com.tracker.tracker.dbLayout.DbOperation;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Class represents all the information
  * about the logged in user
  */
-public class User implements User_interface,Serializable {
+public class User implements User_connect,Serializable {
     private PersonalInfo info;
-    private ArrayList<PersonalInfo> following; // users you are tracking
-    private ArrayList<PersonalInfo> followers; // users tracking you
-    private ArrayList<PersonalInfo> pendingRequests; // request waiting for your approval
     private DbOperation db;
 
     public User(String uname, String pwd){
         this.info=new PersonalInfo();
-        following=new ArrayList<>();
-        followers=new ArrayList<>();
-        pendingRequests=new ArrayList<>();
         db = new DbOperation();
 
         this.info = db.login_user(uname, pwd);
@@ -33,9 +27,7 @@ public class User implements User_interface,Serializable {
 
     public User(String username,String name,String phone,String email) {
         this.info=new PersonalInfo(username,name,phone,email);
-        following=new ArrayList<>();
-        followers=new ArrayList<>();
-        pendingRequests=new ArrayList<>();
+
     }
 
     public String getUsername(){
@@ -70,6 +62,19 @@ public class User implements User_interface,Serializable {
         info.setEmail(email);
     }
 
+    public ArrayList<String>getFollowers(String username){
+        return new ArrayList<>();
+    }
+
+    public ArrayList<String>getFollowings(String username){
+        return new ArrayList<>();
+    }
+    public ArrayList<String>getPendings(String username){
+        return new ArrayList<>();
+    }
+
+
+
     public void addFollowing(String username){
         //PersonalInfo contact=new PersonalInfo(username,name,phone,email);
         //this.following.add(contact);
@@ -85,11 +90,12 @@ public class User implements User_interface,Serializable {
         //this.pendingRequests.add(contact);
     }
 
-    public void send_Request(PersonalInfo user){
+    public void send_Request(String username){
+        //the user want to add contact with this username
     }
 
     //Authenticate user logging in
-    public boolean checkLogin(){
+    public boolean checkLogin(String username,String password){
         return this.info != null;
     }
 
@@ -106,10 +112,8 @@ public class User implements User_interface,Serializable {
         return null;
     }
 
-    public ArrayList<Pair<Location, Timestamp>> get_location(String uname){
-        ArrayList<Pair<Location, Timestamp>> locations = null;
-
-        return locations;
+    public Map<Timestamp,Pair<Double,Double>> get_location(String uname){
+        return null;
     }
 
     public void updateInfo(String name,String phone,String email){
@@ -122,11 +126,11 @@ public class User implements User_interface,Serializable {
     }
 
     public void acceptRequest(int position){
-        this.pendingRequests.remove(position);
+
     }
 
     public void rejectRequest(int position){
-        this.pendingRequests.remove(position);
+
     }
 
     public void register(String username,String password,String name,String phone,String email){
