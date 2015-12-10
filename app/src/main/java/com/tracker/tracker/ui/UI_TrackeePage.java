@@ -39,10 +39,8 @@ public class UI_TrackeePage extends Activity {
         Intent intent = getIntent();
         thisUser = (User) intent.getSerializableExtra("user");
 
-        contact=new ArrayList<>();
-        for(int i=0;i<thisUser.getFollowerSize();i++){
-            contact.add(thisUser.getFollowergName(i));
-        }
+        contact=thisUser.getFollowers();
+
 
         ListView contactList = (ListView) findViewById(R.id.contactlist);
         Adapter myAdapter=new ContactAdapter(this,contact);
@@ -59,7 +57,7 @@ public class UI_TrackeePage extends Activity {
             }
         });
 
-        if(thisUser.getPendingSize()>0)
+        if(thisUser.getPendings()!=null)
             notificationButton.setBackgroundResource(R.drawable.notification);
 
 
