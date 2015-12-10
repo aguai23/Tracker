@@ -41,7 +41,7 @@
             android:id="@+id/textView"
             android:textSize="20dp"
             android:textColor="#f8f5f5"
-            android:layout_marginLeft="100dp"/>
+            android:layout_marginLeft="50dp"/>
 
         <EditText
             android:id="@+id/username"
@@ -71,7 +71,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textColor="#faf8f8"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="50dp"
             />
 
 
