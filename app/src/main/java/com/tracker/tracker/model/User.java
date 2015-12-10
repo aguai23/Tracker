@@ -21,12 +21,12 @@ public class User implements User_connect,Serializable {
     private PersonalInfo info;
     private DbOperation db;
 
-    public User(String uname, String pwd){
+    public User(String username, String pwd){
         this.info = null;
         db = new DbOperation();
 
-        this.info = db.login_user(uname, pwd);
-        if(info!=null) locationService.setuser(uname);
+        this.info = db.login_user(username, pwd);
+        if(info!=null) locationService.setuser(username);
     }
 
     public User() {
@@ -112,12 +112,12 @@ public class User implements User_connect,Serializable {
         return null;
     }
 
-    public PersonalInfo get_user(String uname){
+    public PersonalInfo get_user(String username){
 
         return null;
     }
 
-    public Map<Timestamp,Pair<Double,Double>> get_location(String uname){
+    public Map<Timestamp,Pair<Double,Double>> get_location(String username){
         Map<Timestamp,Pair<Double,Double>> locations = new HashMap<Timestamp,Pair<Double,Double>>();
 
         return locations;
