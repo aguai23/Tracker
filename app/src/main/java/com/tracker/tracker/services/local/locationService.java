@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.tracker.tracker.services.remote.webRequest;
 
+import java.sql.Timestamp;
 import java.util.jar.Manifest;
 
 public class locationService extends Service {
@@ -23,6 +24,12 @@ public class locationService extends Service {
     private String TAG ="LOCATION_SERVICE";
 
     private webRequest webservice;
+
+    private static String username = null;
+
+    public static void setuser(String name){
+        username = name;
+    }
 
     public locationService() {
         webservice = new webRequest();
@@ -48,13 +55,18 @@ public class locationService extends Service {
             while (!STOP_MYSERVICE) {
                 try {
                     wait(TIMEOUT);
-                    if (checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, android.os.Process.myPid(), android.os.Process.myUid())
-                            != PackageManager.PERMISSION_GRANTED){
-                        Log.e(TAG, "No permissions fpr GPS");
+                    if (username != null && checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, android.os.Process.myPid(), android.os.Process.myUid())
+                            == PackageManager.PERMISSION_GRANTED) {
+                        Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        send_location(locationGPS.getLatitude(), locationGPS.getLongitude());
+                    } else {
+                        if(username != null) {
+                            Log.e(TAG, "No permissions for GPS");
+                        } else {
+                            Log.e(TAG, "NULL USER");
+                        }
                     }
-                    Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    send_location(locationGPS.getLatitude(), locationGPS.getLongitude());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -65,6 +77,8 @@ public class locationService extends Service {
     }
 
     private void send_location(double latitude, double longitude) {
-
+        Long time = System.currentTimeMillis()/1000;
+        Timestamp tsTemp = new Timestamp(time);
+        String ts = tsTemp.toString();
     }
 }

@@ -20,7 +20,7 @@ public class UI_Search_contact extends Activity {
     private EditText phone;
     private User thisUser;
     private Button back;
-    private User searchInfo;
+    private PersonalInfo searchInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

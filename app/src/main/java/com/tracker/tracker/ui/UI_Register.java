@@ -59,25 +59,27 @@ public class UI_Register extends Activity {
             boolean inputValid;
             boolean serverValid;
             try{
-                serverValid=thisUser.checkRegister(user,pass,nameString,phoneString,emailString);
-                inputValid=checkValid(user,pass,nameString,phoneString,emailString);
-                if(serverValid==false){
+                thisUser = new User();
+                inputValid=checkValid(user,pass, nameString, phoneString, emailString);
 
+                if(!inputValid){
+                    return ; // TODO
                 }
-                if(inputValid==false){
 
+                serverValid = thisUser.register(user, pass, nameString, phoneString, emailString);
+                if(!serverValid){
+                    return ; // TODO
                 }
-                if(serverValid==true && inputValid==true){
-                    thisUser.register(user,pass,nameString,phoneString,emailString);
-                    thisUser.setUsername(user);
-                    thisUser.setName(nameString);
-                    thisUser.setPhone(phoneString);
-                    thisUser.setEmail(emailString);
 
-                    Intent intent = new Intent(UI_Register.this, UI_PersonalPage.class);
-                    intent.putExtra("user",thisUser);
-                    startActivity(intent);
-                }
+                thisUser.register(user,pass,nameString,phoneString,emailString);
+                thisUser.setUsername(user);
+                thisUser.setName(nameString);
+                thisUser.setPhone(phoneString);
+                thisUser.setEmail(emailString);
+
+                Intent intent = new Intent(UI_Register.this, UI_PersonalPage.class);
+                intent.putExtra("user",thisUser);
+                startActivity(intent);
             }
             catch (Exception e){
 

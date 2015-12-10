@@ -4,7 +4,6 @@ import android.location.Location;
 import android.util.Pair;
 
 import com.tracker.tracker.model.PersonalInfo;
-import com.tracker.tracker.model.User;
 import com.tracker.tracker.services.remote.webRequest;
 
 import org.json.JSONException;
@@ -23,6 +22,12 @@ public class DbOperation extends DbFunction{
     public static final String email = "email";
     public static final String name = "name";
     public static final String password = "password";
+    public static final String tracking = "tracking";
+    public static final String latitude = "latitude";
+    public static final String longitude = "longitude";
+    public static final String timestamp = "timestamp";
+
+
     webRequest remote;
 
     public DbOperation() {
@@ -32,14 +37,13 @@ public class DbOperation extends DbFunction{
     public boolean create_user(PersonalInfo userInfo, String password){
         try {
             JSONObject obj = new JSONObject();
-            obj.put(username, userInfo.getUsername());
-            obj.put(phone, userInfo.getPhone());
-            obj.put(email, userInfo.getEmail());
-            obj.put(name, userInfo.getName());
-            obj.put(password, password);
+            obj.put(this.username, userInfo.getUsername());
+            obj.put(this.phone, userInfo.getPhone());
+            obj.put(this.email, userInfo.getEmail());
+            obj.put(this.name, userInfo.getName());
+            obj.put(this.password, password);
 
-            //remote.send_request(obj, webRequest.REQUEST_TYPE.ADD_USER);
-
+            return remote.register_user(obj);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -54,8 +58,7 @@ public class DbOperation extends DbFunction{
 
     public PersonalInfo login_user(String uname, String pwd){
         PersonalInfo user = null;
-
-
+        //user = remote.login(uname, pwd);
 
         return user;
     }

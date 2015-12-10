@@ -63,7 +63,7 @@ public class UI_Login extends Activity {
 
                 thisUser=new User(user,pass);
 
-                boolean valid=thisUser.checkLogin(user, pass);
+                boolean valid=thisUser.checkLogin();
 
                 if (valid) {
                     thisUser.setUsername("user1");

@@ -38,6 +38,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class UI_SpecificLocation extends Activity implements OnMapReadyCallback {
@@ -45,7 +46,7 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
     private Spinner from;
     private Spinner to;
     private GoogleMap map;
-    private ArrayList<Pair<Location,Timestamp>>locations;
+    private Map<Timestamp,Pair<Double,Double>> locations;
     private User thisUser;
     private Button back;
     private Button ok;
@@ -98,10 +99,6 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
 
         }
 
-
-
-
-
         ArrayAdapter<String>timeAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,time);
         from.setAdapter(timeAdapter);
         to.setAdapter(timeAdapter);
@@ -115,10 +112,6 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
         MapFragment mapFragment=(MapFragment)getFragmentManager().findFragmentById(R.id.map);
         map=mapFragment.getMap();
         mapFragment.getMapAsync(this);
-
-
-
-
     }
 
     private View.OnClickListener backButtonListener=new View.OnClickListener() {
@@ -138,7 +131,9 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
             Timestamp fromStamp=parseTimeString(fromTime);
             Timestamp toStamp=parseTimeString(toTime);
             System.out.println(fromStamp.toString());
-            locations=thisUser.get_location();
+
+            locations=thisUser.get_location(thisUser.getUsername());
+
             //put these locations onto the map
         }
     };
