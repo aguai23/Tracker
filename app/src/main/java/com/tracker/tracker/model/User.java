@@ -3,6 +3,7 @@ package com.tracker.tracker.model;
 import android.location.Location;
 import android.util.Pair;
 
+
 import com.tracker.tracker.dbLayout.DbOperation;
 
 import java.io.Serializable;
@@ -18,11 +19,15 @@ public class User implements User_connect,Serializable {
     private PersonalInfo info;
     private DbOperation db;
 
-    public User(String uname, String pwd){
+    public User(){
+
+    }
+
+    public User(String username, String pwd){
         this.info=new PersonalInfo();
         db = new DbOperation();
 
-        this.info = db.login_user(uname, pwd);
+        this.info = db.login_user(username, pwd);
     }
 
     public User(String username,String name,String phone,String email) {
@@ -62,14 +67,14 @@ public class User implements User_connect,Serializable {
         info.setEmail(email);
     }
 
-    public ArrayList<String>getFollowers(String username){
+    public ArrayList<String>getFollowers(){
         return new ArrayList<>();
     }
 
-    public ArrayList<String>getFollowings(String username){
+    public ArrayList<String>getFollowings(){
         return new ArrayList<>();
     }
-    public ArrayList<String>getPendings(String username){
+    public ArrayList<String>getPendings(){
         return new ArrayList<>();
     }
 
@@ -107,36 +112,36 @@ public class User implements User_connect,Serializable {
         return null;
     }
 
-    public PersonalInfo get_user(String uname){
+    public PersonalInfo get_user(String username){
 
         return null;
     }
 
-    public Map<Timestamp,Pair<Double,Double>> get_location(String uname){
+    public Map<Timestamp,Pair<Double,Double>> get_location(String username){
         return null;
     }
 
     public void updateInfo(String name,String phone,String email){
     }
 
-    public void deleteFollowing(String name){
+    public void deleteFollowing(String username){
     }
 
-    public void deleteFollowers(String name){
+    public void deleteFollowers(String username){
     }
 
-    public void acceptRequest(int position){
+    public void acceptRequest(String username){
 
     }
 
-    public void rejectRequest(int position){
+    public void rejectRequest(String username){
 
     }
 
     public void register(String username,String password,String name,String phone,String email){
     }
 
-    public void addContact(String name){
+    public void addContact(String username){
 
     }
 }

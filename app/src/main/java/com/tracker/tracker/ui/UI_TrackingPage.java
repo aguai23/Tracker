@@ -47,9 +47,7 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
         Intent intent=getIntent();
         contact=new ArrayList<>();
         thisUser=(User)intent.getSerializableExtra("user");
-        for (int i=0;i<thisUser.getFollowingSize();i++){
-            contact.add(thisUser.getFollowingName(i));
-        }
+        contact=thisUser.getFollowings();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         ArrayAdapter<String>contactAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,contact);
         listButton = (Button) findViewById(R.id.listButton);

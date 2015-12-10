@@ -33,10 +33,7 @@ public class UI_Notification extends Activity {
         Intent intent=getIntent();
         thisUser=(User)intent.getSerializableExtra("user");
         request=new ArrayList<>();
-        for(int i=0;i<thisUser.getPendingSize();i++){
-            request.add(thisUser.getPendingName(i));
-        }
-
+        request=thisUser.getPendings();
         list=(ListView)findViewById(R.id.list);
         back=(Button)findViewById(R.id.back);
         myAdapter=new RequestAdapter(this,request);

@@ -138,7 +138,7 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
             Timestamp fromStamp=parseTimeString(fromTime);
             Timestamp toStamp=parseTimeString(toTime);
             System.out.println(fromStamp.toString());
-            locations=thisUser.get_location(fromStamp, toStamp);
+            locations=thisUser.get_location();
             //put these locations onto the map
         }
     };

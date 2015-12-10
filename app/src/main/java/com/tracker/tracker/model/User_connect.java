@@ -12,11 +12,11 @@ import java.util.Map;
  */
 public interface User_connect {
 
-    public ArrayList<String>getFollowers(String username);
+    public ArrayList<String>getFollowers();
 
-    public ArrayList<String>getFollowings(String username);
+    public ArrayList<String>getFollowings();
 
-    public ArrayList<String>getPendings(String username);
+    public ArrayList<String>getPendings();
 
     public void addFollowing(String username);
 
