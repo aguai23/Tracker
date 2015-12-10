@@ -73,7 +73,7 @@ public class UI_Notification extends Activity {
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    thisUser.acceptRequest(position);
+                    thisUser.addFollowers(getItem(position));
 
                     request.remove(position);
 

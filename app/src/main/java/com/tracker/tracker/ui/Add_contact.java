@@ -48,7 +48,7 @@ public class Add_contact extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                thisUser.addContact(searchInfo.getName());
+                thisUser.addFollowing(searchInfo.getName());
                 Intent intent=new Intent(Add_contact.this,UI_Search_contact.class);
                 intent.putExtra("user",thisUser);
                 startActivity(intent);
