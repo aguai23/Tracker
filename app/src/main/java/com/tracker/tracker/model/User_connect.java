@@ -22,10 +22,6 @@ public interface User_connect {
 
     public void addFollowers(String username);
 
-    public void addPending(String username);
-
-    public void send_Request(String username);
-
     PersonalInfo search_user(String phNumber);
 
      Map<Timestamp,Pair<Double,Double>> get_location(String username);

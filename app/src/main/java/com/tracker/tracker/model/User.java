@@ -103,16 +103,6 @@ public class User implements User_connect,Serializable {
         //this.followers.add(contact);
     }
 
-    public void addPending(String username){
-        //PersonalInfo contact=new PersonalInfo(username,name,phone,email);
-        //this.pendingRequests.add(contact);
-    }
-
-    @Override
-    public void send_Request(String username) {
-
-    }
-
     //Authenticate user logging in
     public boolean checkLogin(){
         return this.info != null;
@@ -142,10 +132,6 @@ public class User implements User_connect,Serializable {
     public void deleteFollowers(String name){
     }
 
-    public void acceptRequest(int position){
-        //this.pendingRequests.remove(position);
-    }
-
     public void rejectRequest(int position){
         //this.pendingRequests.remove(position);
     }
@@ -162,7 +148,4 @@ public class User implements User_connect,Serializable {
         return ret;
     }
 
-    public void addContact(String name){
-
-    }
 }
