@@ -81,11 +81,7 @@ public class UI_Register extends Activity {
 
                 thisUser.register(user,pass,nameString,phoneString,emailString);
 
-                //hard code data
-                thisUser.setUsername(user);
-                thisUser.setName(nameString);
-                thisUser.setPhone(phoneString);
-                thisUser.setEmail(emailString);
+
 
                 Intent intent = new Intent(UI_Register.this, UI_PersonalPage.class);
                 intent.putExtra("user",thisUser);
