@@ -57,7 +57,7 @@ public class UI_TrackeePage extends Activity {
             }
         });
 
-        if(thisUser.getPendings()!=null)
+        if(thisUser.getPendings().size()>0)
             notificationButton.setBackgroundResource(R.drawable.notification);
 
 
