@@ -147,8 +147,8 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
                 LatLng thisLocation = new LatLng(location.second.first, location.second.second);
 
                 map.setMyLocationEnabled(true);
-                if (i == 0)
-                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(thisLocation, 13));
+               /* if (i == 0)
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(thisLocation, 13));*/
 
                 map.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))

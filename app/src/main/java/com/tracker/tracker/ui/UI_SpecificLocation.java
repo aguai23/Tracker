@@ -154,7 +154,7 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
                         map.addMarker(new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
 
-                                .title(contact)
+                                .title(contact+Integer.toString(i))
                                 //.snippet(times.get(i).toString())
                                 .snippet(date)
                                 .position(point)).showInfoWindow();
