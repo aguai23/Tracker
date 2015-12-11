@@ -1,5 +1,7 @@
 package com.tracker.tracker.services.remote;
 
+import android.util.Pair;
+
 import com.tracker.tracker.dbLayout.DbOperation;
 import com.tracker.tracker.model.DeviceLocation;
 import com.tracker.tracker.model.PersonalInfo;
@@ -18,8 +20,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,20 +38,31 @@ public class webRequest {
     public static String url = "http://128.237.163.155:8000";
     public HttpURLConnection connection;
 
+    public JSONObject request;
+
+    public REQUEST req;
+
+    public REQUEST_TYPE type;
+
+    public StringBuilder sb = new StringBuilder();
+
     public webRequest() {
     }
 
     public enum REQUEST {
         ADD_USER,
+        DELETE_USER,
         SEND_LOCATION,
         GET_USER,
+        GET_USER_PHONE,
         GET_LOCATIONS,
         GET_FOLLOWING,
         GET_FOLLOWERS,
         ADD_RELATION,
         DELETE_RELATION,
         PENDING_REQUEST,
-        ADD_REQUEST
+        ADD_REQUEST,
+        DELETE_REQUEST
     }
 
     public enum REQUEST_TYPE {
@@ -88,6 +105,15 @@ public class webRequest {
                 case ADD_REQUEST:
                     request = new String("/tracker/add_request");
                     break;
+                case DELETE_USER:
+                    request = new String("/tracker/delete_user?username=["+ (String) obj.get(DbOperation.username) +"]");
+                    break;
+                case DELETE_REQUEST:
+                    request = new String("/tracker/delete_request");
+                    break;
+                case GET_USER_PHONE:
+                    request = new String("/tracker/users?phone=["+(String) obj.get(DbOperation.phone)+"]");
+                    break;
             }
 
         } catch (JSONException e) {
@@ -97,13 +123,113 @@ public class webRequest {
         return request;
     }
 
-    public JSONObject request;
+    public void delete_request(String from, String to){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put(DbOperation.username, from);
+            obj.put(DbOperation.tracking, to);
+            send_request(obj, REQUEST.DELETE_REQUEST, REQUEST_TYPE.POST);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public REQUEST req;
+    public void add_request(String from, String to){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put(DbOperation.username, from);
+            obj.put(DbOperation.tracking, to);
+            send_request(obj, REQUEST.ADD_REQUEST, REQUEST_TYPE.POST);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public REQUEST_TYPE type;
+    public ArrayList<String> get_following(String username){
+        ArrayList<String> following = new ArrayList<String>();
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put(DbOperation.username, username);
+            String response = send_request(obj, REQUEST.GET_FOLLOWERS, REQUEST_TYPE.GET);
+            JSONArray following_list = new JSONArray(response);
+            for(int idx = 0; idx < following_list.length(); idx++){
+                following.add(following_list.getString(idx));
+            }
 
-    public StringBuilder sb = new StringBuilder();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return following;
+    }
+
+    public ArrayList<String> get_pending(String username){
+        ArrayList<String> pending = new ArrayList<String>();
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put(DbOperation.username, username);
+            String response = send_request(obj, REQUEST.GET_FOLLOWERS, REQUEST_TYPE.GET);
+            JSONArray pending_list = new JSONArray(response);
+            for(int idx = 0; idx < pending_list.length(); idx++){
+                pending.add(pending_list.getString(idx));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return pending;
+    }
+
+    public boolean add_relation(String from, String to){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put(DbOperation.username, from);
+            obj.put(DbOperation.tracking, to);
+
+            String response = send_request(obj, REQUEST.ADD_RELATION, REQUEST_TYPE.GET);
+
+            JSONObject obj_res = new JSONObject(response);
+            if(!((String)obj_res.get("error")).equalsIgnoreCase("none")){
+                return false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    public void delete_relation(String from, String to) {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put(DbOperation.username, from);
+            obj.put(DbOperation.tracking, to);
+
+            String response = send_request(obj, REQUEST.DELETE_RELATION, REQUEST_TYPE.GET);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public ArrayList<String> get_followers(String username){
+        ArrayList<String> followers = new ArrayList<String>();
+        JSONObject obj = new JSONObject();
+
+        try {
+            obj.put(DbOperation.username, username);
+            String response = send_request(obj, REQUEST.GET_FOLLOWERS, REQUEST_TYPE.GET);
+            JSONArray follower_list = new JSONArray(response);
+            for(int idx = 0; idx < follower_list.length(); idx++){
+                followers.add(follower_list.getString(idx));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return followers;
+    }
 
     public String send_request(JSONObject request_new, REQUEST req_new, REQUEST_TYPE type_new) {
         request = request_new;
@@ -115,11 +241,11 @@ public class webRequest {
                 @Override
                 public void run() {
                     try {
-                        String header = createHeader(request, req); // <<- HEADER -- unused
+                        String header = createHeader(request, req); // <<- HEADER
 
                         String newurl = new String(url.concat(header));
 
-                        URL uri = new URL(newurl); // TODO: or url.concat(header)
+                        URL uri = new URL(newurl);
 
                         HttpURLConnection con = (HttpURLConnection) uri.openConnection();
 
@@ -127,20 +253,19 @@ public class webRequest {
                             con.setRequestMethod("POST");
                             con.setDoOutput(true);
                             con.setDoInput(true);
+                            String jsonstr = new String(request.toString());
+                            System.out.println(jsonstr);
+
+                            OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream(), "utf-8");
+                            BufferedWriter br = new BufferedWriter(wr);
+
+                            br.write(new String("data=" + request.toString())); // <<- BODY
+                            br.flush();
                         } else {
                             con.setRequestMethod("GET");
-                            con.setDoOutput(true);
+                            con.setDoOutput(false);
                             con.setDoInput(true);
                         }
-
-                        String jsonstr = new String(request.toString());
-                        System.out.println(jsonstr);
-
-                        OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream(), "utf-8");
-                        BufferedWriter br = new BufferedWriter(wr);
-
-                        br.write(new String("data="+request.toString())); // <<- BODY
-                        br.flush();
 
                         int HttpResult = con.getResponseCode();
                         if (HttpResult == HttpURLConnection.HTTP_OK) {
@@ -152,8 +277,7 @@ public class webRequest {
                             }
                             br1.close();
 
-                            System.out.println("" + sb.toString());
-
+                            System.out.println("Response::" + sb.toString());
                         }
 
                     } catch (MalformedURLException e1) {
@@ -191,6 +315,11 @@ public class webRequest {
             }
 
             JSONObject obj =  new JSONObject(response);
+
+            if(!((String)obj.get("error")).equalsIgnoreCase("none")){
+                return null;
+            }
+
             if(pwd.equalsIgnoreCase((String)obj.get((String)DbOperation.password))){
                 info = new PersonalInfo((String)obj.get(DbOperation.username), (String)obj.get(DbOperation.name),
                         (String)obj.get((String)DbOperation.phone), (String)obj.get((String)DbOperation.email));
@@ -203,15 +332,30 @@ public class webRequest {
     }
 
     public boolean register_user(JSONObject obj){
-        return send_request(obj, webRequest.REQUEST.ADD_USER, webRequest.REQUEST_TYPE.POST) == null?false:true;
+        boolean success = false;
+        String response =  send_request(obj, webRequest.REQUEST.ADD_USER, webRequest.REQUEST_TYPE.POST);
+        JSONObject obj_res = null;
+        try {
+            obj_res = new JSONObject(response);
+            if(!((String)obj_res.get("error")).equalsIgnoreCase("none")){
+                success = false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return success;
     }
 
-    public void SendLocation(DeviceLocation loc){
+    public void send_location(DeviceLocation loc){
         JSONObject obj = new JSONObject();
         try {
             obj.put(DbOperation.latitude, Double.toString(loc.getLattitude()));
             obj.put(DbOperation.longitude, Double.toString(loc.getLongitude()));
-            obj.put(DbOperation.timestamp, loc.getTimestamp());
+
+            String ts_str = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
+
+            obj.put(DbOperation.timestamp, ts_str);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -219,17 +363,96 @@ public class webRequest {
         send_request(obj, REQUEST.SEND_LOCATION, REQUEST_TYPE.POST);
     }
 
-    public ArrayList<DeviceLocation> get_location(String user){
-        ArrayList<DeviceLocation> loc = new ArrayList<DeviceLocation>();
+    public Map<Timestamp,Pair<Double,Double>> get_location(String user){
+        Map<Timestamp,Pair<Double,Double>> locationMap = new HashMap<Timestamp,Pair<Double,Double>>();
+
         JSONObject obj_req = new JSONObject();
         try {
             obj_req.put(DbOperation.username, user);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String response = this.send_request(obj_req, webRequest.REQUEST.GET_USER, webRequest.REQUEST_TYPE.GET);
+        String response = this.send_request(obj_req, REQUEST.GET_LOCATIONS, webRequest.REQUEST_TYPE.GET);
+        try {
+            JSONArray location_list = new JSONArray(response);
 
-        return loc;
+            for(int idx = 0; idx < location_list.length(); idx++){
+                JSONObject obj = location_list.getJSONObject(idx);
+                String timestr = (String)obj.get(DbOperation.timestamp);
+                String latstr = (String)(String)obj.get(DbOperation.latitude);
+                String lonstr = (String)(String)obj.get(DbOperation.longitude);
+
+                if(!timestr.isEmpty() && !latstr.isEmpty() && !lonstr.isEmpty()){
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+                    Date parsedDate = null;
+                    parsedDate = dateFormat.parse(timestr);
+                    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+                    locationMap.put(timestamp, new Pair<Double, Double>(Double.parseDouble(latstr), Double.parseDouble(lonstr)));
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return locationMap;
     }
 
+    public PersonalInfo search_user(String phone){
+        PersonalInfo info = null;
+        JSONObject obj_req = new JSONObject();
+        try {
+            obj_req.put(DbOperation.phone, phone);
+            String response = this.send_request(obj_req, REQUEST.GET_USER_PHONE, webRequest.REQUEST_TYPE.GET);
+            if(response.isEmpty()){
+                return null;
+            }
+
+            JSONObject obj =  new JSONObject(response);
+
+            if(!((String)obj.get("error")).equalsIgnoreCase("none")){
+                return null;
+            }
+
+            info = new PersonalInfo((String)obj.get(DbOperation.username), (String)obj.get(DbOperation.name),
+                    (String)obj.get((String)DbOperation.phone), (String)obj.get((String)DbOperation.email));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return info;
+    }
+
+    public PersonalInfo get_user(String username){
+        PersonalInfo info = null;
+
+        JSONObject obj_req = new JSONObject();
+        try {
+            obj_req.put(DbOperation.username, username);
+            String response = this.send_request(obj_req, webRequest.REQUEST.GET_USER, webRequest.REQUEST_TYPE.GET);
+            if(response.isEmpty()){
+                return null;
+            }
+
+            JSONObject obj =  new JSONObject(response);
+
+            if(!((String)obj.get("error")).equalsIgnoreCase("none")){
+                return null;
+        }
+
+        info = new PersonalInfo((String)obj.get(DbOperation.username), (String)obj.get(DbOperation.name),
+                (String)obj.get((String)DbOperation.phone), (String)obj.get((String)DbOperation.email));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return info;
+    }
+
+    public void delete_user(JSONObject obj){
+        send_request(obj, REQUEST.DELETE_USER, REQUEST_TYPE.GET);
+    }
 }

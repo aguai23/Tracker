@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.tracker.tracker.model.DeviceLocation;
 import com.tracker.tracker.services.remote.webRequest;
 
 import java.sql.Timestamp;
@@ -66,7 +67,6 @@ public class locationService extends Service {
                             Log.e(TAG, "NULL USER");
                         }
                     }
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -77,8 +77,10 @@ public class locationService extends Service {
     }
 
     private void send_location(double latitude, double longitude) {
-        Long time = System.currentTimeMillis()/1000;
-        Timestamp tsTemp = new Timestamp(time);
-        String ts = tsTemp.toString();
+        java.util.Date today = new java.util.Date();
+        Timestamp tsTemp = new java.sql.Timestamp(today.getTime());
+        DeviceLocation loc = new DeviceLocation(tsTemp, longitude, latitude);
+
+        webservice.send_location(loc);
     }
 }
