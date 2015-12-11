@@ -31,8 +31,7 @@ public class UI_Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Intent intent = new Intent(this, locationService.class);
-        startService(intent);
+
 
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(loginButtonListener);

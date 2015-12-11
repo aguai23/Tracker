@@ -21,7 +21,7 @@ import java.util.jar.Manifest;
 public class locationService extends Service implements Serializable   {
     private boolean STOP_MYSERVICE = false;
 
-    private long TIMEOUT = 10000;
+    private long TIMEOUT = 100000;
 
     private String TAG ="LOCATION_SERVICE";
 
@@ -79,6 +79,8 @@ public class locationService extends Service implements Serializable   {
             }
         });
 
+        thread.start();
+
         return START_STICKY;
     }
 
@@ -87,6 +89,6 @@ public class locationService extends Service implements Serializable   {
         Timestamp tsTemp = new java.sql.Timestamp(today.getTime());
         DeviceLocation loc = new DeviceLocation(tsTemp, longitude, latitude);
 
-        webservice.send_location(loc);
+        webservice.send_location(loc, username);
     }
 }

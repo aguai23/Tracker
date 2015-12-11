@@ -84,7 +84,7 @@ public class webRequest implements Serializable{
                     request = new String("/tracker/locations?username=" + (String) obj.get(DbOperation.username));
                     break;
                 case SEND_LOCATION:
-                    request = new String("/tracker/location");
+                    request = new String("/tracker/add_location");
                     break;
                 case GET_FOLLOWING:
                     request = new String("/tracker/get_tracking_users?username=" + (String) obj.get(DbOperation.username));
@@ -353,11 +353,12 @@ public class webRequest implements Serializable{
         return success;
     }
 
-    public void send_location(DeviceLocation loc){
+    public void send_location(DeviceLocation loc, String username){
         JSONObject obj = new JSONObject();
         try {
             obj.put(DbOperation.latitude, Double.toString(loc.getLattitude()));
             obj.put(DbOperation.longitude, Double.toString(loc.getLongitude()));
+            obj.put(DbOperation.username, username);
 
             String ts_str = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
 

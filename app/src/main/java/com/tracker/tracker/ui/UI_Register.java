@@ -14,6 +14,7 @@ import com.tracker.tracker.exception.InvalidAccountException;
 import com.tracker.tracker.exception.NoInputException;
 import com.tracker.tracker.exception.UserExistException;
 import com.tracker.tracker.model.User;
+import com.tracker.tracker.services.local.locationService;
 
 public class UI_Register extends Activity {
 
@@ -79,6 +80,8 @@ public class UI_Register extends Activity {
                     throw new UserExistException();
                 }
 
+                Intent intentservice = new Intent(getApplicationContext(), locationService.class);
+                startService(intentservice);
 
                 Intent intent = new Intent(UI_Register.this, UI_PersonalPage.class);
                 intent.putExtra("user",thisUser);
