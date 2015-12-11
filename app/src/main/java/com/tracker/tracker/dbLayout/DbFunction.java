@@ -6,6 +6,7 @@ import android.util.Pair;
 import com.tracker.tracker.model.PersonalInfo;
 import com.tracker.tracker.model.User;
 
+import java.io.Serializable;
 import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
 /**
  * abstract class defines dbfuntion
  */
-public abstract class DbFunction {
+public abstract class DbFunction implements Serializable{
     public abstract boolean create_user(PersonalInfo userInfo, String password);
 
     public abstract boolean update_use(PersonalInfo userInfo);

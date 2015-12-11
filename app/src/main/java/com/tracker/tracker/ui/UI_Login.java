@@ -45,11 +45,7 @@ public class UI_Login extends Activity {
 
         error=(TextView)findViewById(R.id.error);
 
-
-
     }
-
-
 
     private View.OnClickListener loginButtonListener = new View.OnClickListener() {
         @Override
@@ -58,26 +54,15 @@ public class UI_Login extends Activity {
             String user=username.getText().toString();
             String pass=password.getText().toString();
 
-
-
             try {
-                if (user.length() == 0 || pass.length() == 0) {
-                    throw new NoInputException();
+                    if (user.length() == 0 || pass.length() == 0) {
+                        throw new NoInputException();
                 }
 
-                thisUser=new User();
-
-
+                thisUser=new User(user, pass);
                 boolean valid=thisUser.checkLogin();
 
-
                 if (valid) {
-                    System.out.println("click");
-                    thisUser.setUsername("user1");
-                    thisUser.setName("me");
-                    thisUser.setEmail("yyiiu@gmail");
-                    thisUser.setPhone("33322232323");
-                    System.out.println("click");
 
                     Intent intent = new Intent(UI_Login.this, UI_PersonalPage.class);
                     intent.putExtra("user",thisUser);
@@ -96,7 +81,6 @@ public class UI_Login extends Activity {
     private View.OnClickListener registerButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
             //just navigate to register page,no more actions needed
             Intent intent = new Intent(UI_Login.this, UI_Register.class);
             startActivity(intent);

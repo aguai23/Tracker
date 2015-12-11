@@ -1,7 +1,9 @@
 package com.tracker.tracker.exception;
 
 
-public class TimeConflictException extends Exception{
+import java.io.Serializable;
+
+public class TimeConflictException extends Exception implements Serializable{
     public TimeConflictException(){
         super();
     }

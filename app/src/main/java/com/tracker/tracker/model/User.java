@@ -29,7 +29,7 @@ public class User implements User_connect,Serializable {
         if(info!=null) locationService.setuser(username);
     }
 
-    public User() {
+    public   User() {
         this.info=null;
         db = new DbOperation();
     }

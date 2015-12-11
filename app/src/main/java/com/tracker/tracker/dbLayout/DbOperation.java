@@ -59,10 +59,7 @@ public class DbOperation extends DbFunction implements Serializable{
     }
 
     public PersonalInfo login_user(String uname, String pwd){
-        PersonalInfo user = null;
-        //user = remote.login(uname, pwd);
-
-        return user;
+        return remote.login(uname, pwd);
     }
 
     public boolean approve_follower(PersonalInfo info){

@@ -1,7 +1,9 @@
 package com.tracker.tracker.exception;
 
 
-public class UserExistException extends Exception {
+import java.io.Serializable;
+
+public class UserExistException extends Exception implements Serializable{
     public UserExistException(){
         super();
     }

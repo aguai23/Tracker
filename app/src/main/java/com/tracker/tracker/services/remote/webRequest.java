@@ -37,9 +37,8 @@ import java.util.Map;
 public class webRequest implements Serializable{
 
     public static String url = "http://128.237.180.213:8000";
-    public HttpURLConnection connection;
 
-    public JSONObject request;
+    public String request;
 
     public REQUEST req;
 
@@ -79,41 +78,41 @@ public class webRequest implements Serializable{
                     request =  new String("/tracker/add_user");
                     break;
                 case GET_USER:
-                    request = new String("/tracker/users?username=[" + (String) obj.get(DbOperation.username) + "]");
+                    request = new String("/tracker/users?username=" + (String) obj.get(DbOperation.username));
                     break;
                 case GET_LOCATIONS:
-                    request = new String("/tracker/locations?username=[" + (String) obj.get(DbOperation.username) + "]");
+                    request = new String("/tracker/locations?username=" + (String) obj.get(DbOperation.username));
                     break;
                 case SEND_LOCATION:
                     request = new String("/tracker/location");
                     break;
                 case GET_FOLLOWING:
-                    request = new String("/tracker/get_tracking_users?username=[" + (String) obj.get(DbOperation.username) + "]");
+                    request = new String("/tracker/get_tracking_users?username=" + (String) obj.get(DbOperation.username));
                     break;
                 case GET_FOLLOWERS:
-                    request = new String("/tracker/get_trackee_users?username=[" + (String) obj.get(DbOperation.username) + "]");
+                    request = new String("/tracker/get_trackee_users?username=" + (String) obj.get(DbOperation.username));
                     break;
                 case ADD_RELATION:
                     request = new String("/tracker/add_relation");
                     break;
                 case DELETE_RELATION:
-                    request = new String("/tracker/get_trackee_users?username=[" + (String) obj.get(DbOperation.username)
-                            + "]"+"&tracking=["+(String) obj.get(DbOperation.tracking)+"]");
+                    request = new String("/tracker/get_trackee_users?username=" + (String) obj.get(DbOperation.username)
+                            +"&tracking="+(String) obj.get(DbOperation.tracking));
                     break;
                 case PENDING_REQUEST:
-                    request = new String("/tracker/requests?username=[" + (String) obj.get(DbOperation.username) + "]");
+                    request = new String("/tracker/requests?username=" + (String) obj.get(DbOperation.username));
                     break;
                 case ADD_REQUEST:
                     request = new String("/tracker/add_request");
                     break;
                 case DELETE_USER:
-                    request = new String("/tracker/delete_user?username=["+ (String) obj.get(DbOperation.username) +"]");
+                    request = new String("/tracker/delete_user?username="+ (String) obj.get(DbOperation.username));
                     break;
                 case DELETE_REQUEST:
                     request = new String("/tracker/delete_request");
                     break;
                 case GET_USER_PHONE:
-                    request = new String("/tracker/users?phone=["+(String) obj.get(DbOperation.phone)+"]");
+                    request = new String("/tracker/users?phone="+(String) obj.get(DbOperation.phone));
                     break;
             }
 
@@ -233,7 +232,7 @@ public class webRequest implements Serializable{
     }
 
     public String send_request(JSONObject request_new, REQUEST req_new, REQUEST_TYPE type_new) {
-        request = request_new;
+        request = request_new.toString();
         req = req_new;
         type = type_new;
 
@@ -242,7 +241,9 @@ public class webRequest implements Serializable{
                 @Override
                 public void run() {
                     try {
-                        String header = createHeader(request, req); // <<- HEADER
+                        JSONObject jsonrequest = new JSONObject(request);
+
+                        String header = createHeader(jsonrequest, req); // <<- HEADER
 
                         String newurl = new String(url.concat(header));
 
@@ -254,13 +255,13 @@ public class webRequest implements Serializable{
                             con.setRequestMethod("POST");
                             con.setDoOutput(true);
                             con.setDoInput(true);
-                            String jsonstr = new String(request.toString());
+                            String jsonstr = new String(jsonrequest.toString());
                             System.out.println(jsonstr);
 
                             OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream(), "utf-8");
                             BufferedWriter br = new BufferedWriter(wr);
 
-                            br.write(new String("data=" + request.toString())); // <<- BODY
+                            br.write(new String("data=" + jsonrequest.toString())); // <<- BODY
                             br.flush();
                         } else {
                             con.setRequestMethod("GET");
