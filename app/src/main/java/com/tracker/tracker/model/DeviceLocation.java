@@ -1,11 +1,12 @@
 package com.tracker.tracker.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * Device Location information
  */
-public class DeviceLocation {
+public class DeviceLocation implements Serializable{
     private Double lattitude;
     private Double longitude;
 

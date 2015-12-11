@@ -14,10 +14,11 @@ import android.widget.Toast;
 import com.tracker.tracker.model.DeviceLocation;
 import com.tracker.tracker.services.remote.webRequest;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.jar.Manifest;
 
-public class locationService extends Service {
+public class locationService extends Service implements Serializable   {
     private boolean STOP_MYSERVICE = false;
 
     private long TIMEOUT = 10000;
@@ -49,29 +50,34 @@ public class locationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        LocationManager locationManager = (LocationManager)
-                getSystemService(Context.LOCATION_SERVICE);
 
-        synchronized (this) {
-            while (!STOP_MYSERVICE) {
-                try {
-                    wait(TIMEOUT);
-                    if (username != null && checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, android.os.Process.myPid(), android.os.Process.myUid())
-                            == PackageManager.PERMISSION_GRANTED) {
-                        Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                        send_location(locationGPS.getLatitude(), locationGPS.getLongitude());
-                    } else {
-                        if(username != null) {
-                            Log.e(TAG, "No permissions for GPS");
-                        } else {
-                            Log.e(TAG, "NULL USER");
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                LocationManager locationManager = (LocationManager)
+                        getSystemService(Context.LOCATION_SERVICE);
+                synchronized (this) {
+                    while (!STOP_MYSERVICE) {
+                        try {
+                            wait(TIMEOUT);
+                            if (username != null && checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, android.os.Process.myPid(), android.os.Process.myUid())
+                                    == PackageManager.PERMISSION_GRANTED) {
+                                Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                send_location(locationGPS.getLatitude(), locationGPS.getLongitude());
+                            } else {
+                                if (username != null) {
+                                    Log.e(TAG, "No permissions for GPS");
+                                } else {
+                                    Log.e(TAG, "NULL USER");
+                                }
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
             }
-        }
+        });
 
         return START_STICKY;
     }

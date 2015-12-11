@@ -333,12 +333,16 @@ public class webRequest implements Serializable{
     }
 
     public boolean register_user(JSONObject obj){
-        boolean success = false;
+        boolean success = true;
         String response =  send_request(obj, webRequest.REQUEST.ADD_USER, webRequest.REQUEST_TYPE.POST);
         JSONObject obj_res = null;
         try {
             obj_res = new JSONObject(response);
-            if(((String)obj_res.get("error")).equalsIgnoreCase("none")){
+            String re = new String((String) obj_res.get("error"));
+
+            System.out.println(re);
+
+            if(!((String)obj_res.get("error")).equalsIgnoreCase("None")){
                 success = false;
             }
         } catch (JSONException e) {

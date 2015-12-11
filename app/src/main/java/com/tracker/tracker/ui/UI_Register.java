@@ -79,9 +79,6 @@ public class UI_Register extends Activity {
                     throw new UserExistException();
                 }
 
-                thisUser.register(user,pass,nameString,phoneString,emailString);
-
-
 
                 Intent intent = new Intent(UI_Register.this, UI_PersonalPage.class);
                 intent.putExtra("user",thisUser);
