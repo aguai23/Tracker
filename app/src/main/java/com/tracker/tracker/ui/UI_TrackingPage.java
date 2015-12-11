@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.tracker.tracker.R;
+import com.tracker.tracker.exception.NoLocationsException;
 import com.tracker.tracker.model.PersonalInfo;
 import com.tracker.tracker.model.User;
 
@@ -132,23 +133,35 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        try {
 
-        for(int i=0;i<contact.size();i++){
-            Map<Timestamp,Pair<Double,Double>> locations=thisUser.get_location(contact.get(i));
-            Pair<String,Pair<Double,Double>> location=getLatest(locations);
 
-            LatLng thisLocation=new LatLng(location.second.first,location.second.second);
+            for (int i = 0; i < contact.size(); i++) {
+                Map<Timestamp, Pair<Double, Double>> locations = thisUser.get_location(contact.get(i));
+                if (locations.size() == 0) {
+                    throw new NoLocationsException();
 
-            map.setMyLocationEnabled(true);
-            if(i==0)
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(thisLocation, 13));
+                }
+                Pair<String, Pair<Double, Double>> location = getLatest(locations);
 
-            map.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
+                LatLng thisLocation = new LatLng(location.second.first, location.second.second);
 
-                    .title(contact.get(i))
-                    .snippet(location.first )
-                    .position(thisLocation)).showInfoWindow();
+                map.setMyLocationEnabled(true);
+                if (i == 0)
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(thisLocation, 13));
+
+                map.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
+
+                        .title(contact.get(i))
+                        .snippet(location.first.toString())
+                        .position(thisLocation)).showInfoWindow();
+            }
+        }
+
+        catch (Exception e){
+            Toast.makeText(UI_TrackingPage.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
 
 

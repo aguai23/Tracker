@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.tracker.tracker.R;
+import com.tracker.tracker.exception.NoLocationsException;
 import com.tracker.tracker.exception.TimeConflictException;
 import com.tracker.tracker.model.User;
 
@@ -39,7 +40,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -80,34 +83,18 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
 
         choice=new ArrayList<>();
         ArrayList<String>time=new ArrayList<>();
+        choice.add(new Timestamp(c.getTimeInMillis()));
 
-        for(int i=1;i<25;i++){
+        for(int i=0;i<24;i++){
 
             c.add(Calendar.HOUR,-1);
 
-            int year= c.get(Calendar.YEAR);
-            int month=c.get(Calendar.MONTH);
-            int day=c.get(Calendar.DATE);
-            int hours=c.get(Calendar.HOUR_OF_DAY);
-            hours=hours-i;
-            if(hours<0){
-                hours+=24;
-                day=day-1;
-            }
             choice.add(new Timestamp(c.getTimeInMillis()));
 
         }
 
 
         for(int i=0;i<choice.size();i++){
-            System.out.println(choice.get(i).toString());
-            Calendar c1=Calendar.getInstance();
-            c1.setTimeInMillis(choice.get(i).getTime());
-            int year= c1.get(Calendar.YEAR)-1900;
-            int month=c1.get(Calendar.MONTH);
-            int day=c1.get(Calendar.DATE);
-            int hours=c1.get(Calendar.HOUR_OF_DAY);
-            //time.add(year+"-"+month+"-"+day+"-"+hours);
             time.add(choice.get(i).toString());
 
         }
@@ -117,14 +104,20 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
         to.setAdapter(timeAdapter);
         from.setOnItemSelectedListener(new CustomOnItemSelectedListener());
         to.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+        from.setVisibility(View.GONE);
+        to.setVisibility(View.GONE);
 
 
         ok=(Button)findViewById(R.id.ok);
         ok.setOnClickListener(okButtonListener);
-        ok.setText(now.toString());
         MapFragment mapFragment=(MapFragment)getFragmentManager().findFragmentById(R.id.map);
         map=mapFragment.getMap();
         mapFragment.getMapAsync(this);
+
+        locations=thisUser.get_location(contact);
+        if(locations.size()==0){
+            ok.setClickable(false);
+        }
     }
 
     private View.OnClickListener backButtonListener=new View.OnClickListener() {
@@ -145,22 +138,24 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
             Timestamp toStamp = Timestamp.valueOf(toTime);
 
             try {
-                if (fromStamp.after(toStamp)) {
+                if (!fromStamp.before(toStamp)) {
                     throw new TimeConflictException();
                 }
                 points.clear();
-                locations=thisUser.get_location(contact);
                 for(int i=0;i<locations.size();i++){
                     ArrayList<Timestamp> times=new ArrayList<>(locations.keySet());
                     if(times.get(i).after(fromStamp) && times.get(i).before(toStamp)){
                         Pair<Double,Double>location=locations.get(times.get(i));
                         LatLng point=new LatLng(location.first,location.second);
                         points.add(point);
+                        Date time = new Date(times.get(i).getTime());
+                        String date = new SimpleDateFormat("MM-dd HH:mm").format(time);
                         map.addMarker(new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
 
                                 .title(contact)
-                                .snippet(times.get(i).toString())
+                                //.snippet(times.get(i).toString())
+                                .snippet(date)
                                 .position(point)).showInfoWindow();
 
                     }
@@ -180,10 +175,9 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
             }
             System.out.println(fromStamp.toString());
 
-            locations = thisUser.get_location(thisUser.getUsername());
 
 
-            //put these locations onto the map
+
         }
     };
 
@@ -200,25 +194,59 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
 
     @Override
     public void onMapReady(GoogleMap map) {
-        LatLng sydney = new LatLng(-33.867, 151.206);
+        try {
+            if(locations.size()==0){
+                throw new NoLocationsException();
+            }
 
-        map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+            PolylineOptions line=new PolylineOptions().geodesic(true).color(Color.GREEN);
 
-        map.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
+            ArrayList<Timestamp> times=new ArrayList<>(locations.keySet());
+            Collections.sort(times);
+            for(int i=0;i<locations.size();i++){
 
-                .title("User1")
-                .snippet("The time stamp.")
-                .position(sydney)).showInfoWindow();
+                    Pair<Double,Double>location=locations.get(times.get(i));
+                    LatLng point=new LatLng(location.first,location.second);
+                    line.add(point);
+                    points.add(point);
+                    Date time = new Date(times.get(i).getTime());
+                    String date = new SimpleDateFormat("MMMM dd HH:mm", Locale.ENGLISH).format(time);
+                    map.addMarker(new MarkerOptions()
+                            .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
 
-        map.addPolyline(new PolylineOptions().geodesic(true)
-                        .add(new LatLng(-33.866, 151.195))  // Sydney
-                        .add(new LatLng(-18.142, 178.431))  // Fiji
-                        .add(new LatLng(21.291, -157.821))  // Hawaii
-                        .add(new LatLng(37.423, -122.091))// Mountain View
-                        .color(Color.GREEN)
-        );
+                            .title(contact)
+                            .snippet(date)
+                            .position(point)).showInfoWindow();
+
+                }
+
+            map.addPolyline(line);
+
+
+
+
+            /*Pair<String, Pair<Double, Double>> location = getLatest(locations);
+
+            LatLng thisLocation = new LatLng(location.second.first, location.second.second);
+
+            map.setMyLocationEnabled(true);
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(thisLocation, 13));
+
+
+
+            map.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
+
+                    .title(contact)
+                    .snippet(location.first)
+                    .position(thisLocation)).showInfoWindow();*/
+
+
+        }
+        catch (Exception e){
+            Toast.makeText(UI_SpecificLocation.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
 
     }
 
@@ -241,6 +269,17 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(iconName, "drawable", getPackageName()));
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
         return resizedBitmap;
+    }
+
+
+    public Pair<String,Pair<Double,Double>> getLatest(Map<Timestamp,Pair<Double,Double>>locations){
+        ArrayList<Timestamp>times=new ArrayList<>(locations.keySet());
+
+        Collections.sort(times);
+        Timestamp time = times.get(times.size() - 1);
+        Pair location=new Pair(time.toString(), locations.get(time));
+        return location;
+
     }
 
 

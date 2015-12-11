@@ -36,7 +36,7 @@ import java.util.Map;
  */
 public class webRequest implements Serializable{
 
-    public static String url = "http://128.237.180.213:8000";
+    public static String url = "http://128.237.175.18:8000";
 
     public String request;
 
