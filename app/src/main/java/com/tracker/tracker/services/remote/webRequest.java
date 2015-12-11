@@ -150,7 +150,7 @@ public class webRequest implements Serializable{
         JSONObject obj = new JSONObject();
         try {
             obj.put(DbOperation.username, username);
-            String response = send_request(obj, REQUEST.GET_FOLLOWERS, REQUEST_TYPE.GET);
+            String response = send_request(obj, REQUEST.GET_FOLLOWING, REQUEST_TYPE.GET);
             JSONArray following_list = new JSONArray(response);
             for(int idx = 0; idx < following_list.length(); idx++){
                 following.add(following_list.getString(idx));
@@ -384,7 +384,7 @@ public class webRequest implements Serializable{
             JSONArray location_list = new JSONArray(response);
 
             for(int idx = 0; idx < location_list.length(); idx++){
-                JSONObject obj = location_list.getJSONObject(idx);
+                JSONObject obj = new JSONObject(location_list.getString(idx));
                 String timestr = (String)obj.get(DbOperation.timestamp);
                 String latstr = (String)(String)obj.get(DbOperation.latitude);
                 String lonstr = (String)(String)obj.get(DbOperation.longitude);

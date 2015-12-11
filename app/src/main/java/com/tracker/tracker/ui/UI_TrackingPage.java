@@ -181,8 +181,10 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
 
     public Pair<String,Pair<Double,Double>> getLatest(Map<Timestamp,Pair<Double,Double>>locations){
         ArrayList<Timestamp>times=new ArrayList<>(locations.keySet());
+
         Collections.sort(times);
-        Pair location=new Pair(times.get(0).toString(),locations.get(times.get(0)));
+        Timestamp time = times.get(times.size() - 1);
+        Pair location=new Pair(time.toString(), locations.get(time));
         return location;
 
     }
