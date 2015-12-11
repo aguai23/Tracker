@@ -110,6 +110,7 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
 
         ok=(Button)findViewById(R.id.ok);
         ok.setOnClickListener(okButtonListener);
+        ok.setVisibility(View.GONE);
         MapFragment mapFragment=(MapFragment)getFragmentManager().findFragmentById(R.id.map);
         map=mapFragment.getMap();
         mapFragment.getMapAsync(this);

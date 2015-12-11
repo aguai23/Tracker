@@ -34,7 +34,7 @@ public class UI_UserProfile extends Activity {
         Intent intent=getIntent();
         thisUser=(User)intent.getSerializableExtra("user");
         name=(EditText)findViewById(R.id.name);
-        phone=(EditText)findViewById(R.id.name);
+        phone=(EditText)findViewById(R.id.phone);
         email=(EditText)findViewById(R.id.email);
         username=(TextView)findViewById(R.id.username);
 

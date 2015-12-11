@@ -50,10 +50,14 @@ public class UI_Profile extends Activity {
         }
         contactName=(String)intent.getStringExtra("contact");
         contact=thisUser.get_user(contactName);
-        username.setText(contact.getUsername());
-        name.setText(contact.getName());
-        phone.setText(contact.getPhone());
-        email.setText(contact.getEmail());
+        String username1=contact.getUsername();
+        String name1=contact.getName();
+        String phone1=contact.getPhone();
+        String email1=contact.getEmail();
+        username.setText(username1);
+        name.setText(name1);
+        phone.setText(phone1);
+        email.setText(email1);
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override

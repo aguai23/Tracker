@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.tracker.tracker.R;
 import com.tracker.tracker.model.User;
+import com.tracker.tracker.services.local.locationService;
 
 public class UI_PersonalPage extends Activity {
 
@@ -53,6 +54,7 @@ public class UI_PersonalPage extends Activity {
     private View.OnClickListener logoutButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            locationService.setuser("");
             Intent intent = new Intent(UI_PersonalPage.this, UI_Login.class);
             startActivity(intent);
         }
