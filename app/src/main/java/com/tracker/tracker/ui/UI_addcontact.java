@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.tracker.tracker.R;
+import com.tracker.tracker.model.PersonalInfo;
 import com.tracker.tracker.model.User;
 
 public class UI_addcontact extends AppCompatActivity {
@@ -19,7 +20,7 @@ public class UI_addcontact extends AppCompatActivity {
     private Button add;
     private Button back;
     private User thisUser;
-    private User searchInfo;
+    private PersonalInfo searchInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class UI_addcontact extends AppCompatActivity {
 
         Intent intent=getIntent();
         thisUser=(User)intent.getSerializableExtra("user");
-        searchInfo=(User)intent.getSerializableExtra("search");
+        searchInfo=(PersonalInfo)intent.getSerializableExtra("search");
 
         username.setText(searchInfo.getUsername());
         name.setText(searchInfo.getName());
@@ -45,7 +46,7 @@ public class UI_addcontact extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                thisUser.addFollowing(searchInfo.getName());
+                thisUser.addFollowing(searchInfo.getUsername());
                 Intent intent=new Intent(UI_addcontact.this,UI_Search_contact.class);
                 intent.putExtra("user",thisUser);
                 startActivity(intent);

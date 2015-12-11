@@ -65,7 +65,7 @@ public class UI_Search_contact extends Activity {
                 if(searchInfo==null)
                     result.setText("no result");
                 else
-                    result.setText(searchInfo.getName());
+                    result.setText(searchInfo.getUsername());
             }
         });
 

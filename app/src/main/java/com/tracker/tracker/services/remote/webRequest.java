@@ -273,7 +273,7 @@ public class webRequest implements Serializable{
                         if (HttpResult == HttpURLConnection.HTTP_OK) {
                             BufferedReader br1 = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
                             String line = null;
-
+                            sb = new StringBuilder();
                             while ((line = br1.readLine()) != null) {
                                 sb.append(line + "\n");
                             }
