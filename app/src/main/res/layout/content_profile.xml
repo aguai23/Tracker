@@ -58,7 +58,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="phone"
             android:ems="10"
             android:id="@+id/phone"
             android:layout_below="@+id/phone"
@@ -80,17 +79,23 @@
             android:layout_gravity="center"
             android:textColorHint="#f8f5f5"
             android:textSize="20dp"/>
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Delete this contact"
-            android:id="@+id/delete"
-            android:layout_marginTop="43dp"
-            android:layout_below="@+id/delete"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/button"
-            android:layout_gravity="center"/>
+            android:layout_marginTop="30dp"
+            android:id="@+id/buttonLayout"
+            android:visibility="visible"
+            android:orientation="vertical"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete this contact"
+                android:id="@+id/delete"
+                android:background="@drawable/button"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 

@@ -41,7 +41,9 @@
             android:id="@+id/textView"
             android:textSize="20dp"
             android:textColor="#f8f5f5"
-            android:layout_marginLeft="50dp"/>
+
+            android:textColorHint="@color/orange"
+            android:layout_marginLeft="30dp"/>
 
         <EditText
             android:id="@+id/username"
@@ -49,6 +51,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:textColorHint="@color/orange"
+            android:textColor="#f8f5f5"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"/>
 
@@ -70,8 +73,8 @@
             android:textSize="20dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textColor="#faf8f8"
-            android:layout_marginLeft="50dp"
+            android:textColor="#f8f5f5"
+            android:layout_marginLeft="30dp"
             />
 
 
@@ -83,6 +86,7 @@
             android:inputType="textPersonName"
             android:layout_below="@+id/username"
             android:textSize="20dp"
+            android:textColor="#f8f5f5"
             android:textColorHint="@color/orange"
             android:layout_marginLeft="20dp"/>
 

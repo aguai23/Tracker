@@ -9,7 +9,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center">
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="50dp"
             android:text="Contact1"
             android:textSize="30dp"
@@ -18,7 +18,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:text="accept"
             android:id="@+id/accept"
             android:background="@drawable/button1"
@@ -26,7 +26,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:text="reject"
             android:id="@+id/reject"
             android:layout_marginLeft="30dp"
