@@ -56,6 +56,7 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
         contact=thisUser.getFollowings();
         if(contact==null)
             contact=new ArrayList<>();
+        contact.add(thisUser.getUsername());
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         ArrayAdapter<String>contactAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,contact);
         listButton = (Button) findViewById(R.id.listButton);
@@ -139,7 +140,9 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
             for (int i = 0; i < contact.size(); i++) {
                 Map<Timestamp, Pair<Double, Double>> locations = thisUser.get_location(contact.get(i));
                 if (locations.size() == 0) {
-                    throw new NoLocationsException();
+                    Toast.makeText(UI_TrackingPage.this, "some contact has no locations", Toast.LENGTH_LONG).show();
+                    continue;
+
 
                 }
                 Pair<String, Pair<Double, Double>> location = getLatest(locations);
