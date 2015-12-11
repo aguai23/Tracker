@@ -96,7 +96,7 @@ public class webRequest implements Serializable{
                     request = new String("/tracker/add_relation");
                     break;
                 case DELETE_RELATION:
-                    request = new String("/tracker/get_trackee_users?username=" + (String) obj.get(DbOperation.username)
+                    request = new String("/tracker/delete_relation?username=" + (String) obj.get(DbOperation.username)
                             +"&tracking="+(String) obj.get(DbOperation.tracking));
                     break;
                 case PENDING_REQUEST:
@@ -128,7 +128,7 @@ public class webRequest implements Serializable{
         try {
             obj.put(DbOperation.username, from);
             obj.put(DbOperation.tracking, to);
-            send_request(obj, REQUEST.DELETE_REQUEST, REQUEST_TYPE.POST);
+            send_request(obj, REQUEST.DELETE_RELATION, REQUEST_TYPE.GET);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -168,7 +168,7 @@ public class webRequest implements Serializable{
         JSONObject obj = new JSONObject();
         try {
             obj.put(DbOperation.username, username);
-            String response = send_request(obj, REQUEST.GET_FOLLOWERS, REQUEST_TYPE.GET);
+            String response = send_request(obj, REQUEST.PENDING_REQUEST, REQUEST_TYPE.GET);
             JSONArray pending_list = new JSONArray(response);
             for(int idx = 0; idx < pending_list.length(); idx++){
                 pending.add(pending_list.getString(idx));
@@ -187,7 +187,7 @@ public class webRequest implements Serializable{
             obj.put(DbOperation.username, from);
             obj.put(DbOperation.tracking, to);
 
-            String response = send_request(obj, REQUEST.ADD_RELATION, REQUEST_TYPE.GET);
+            String response = send_request(obj, REQUEST.ADD_RELATION, REQUEST_TYPE.POST);
 
             JSONObject obj_res = new JSONObject(response);
             if(!((String)obj_res.get("error")).equalsIgnoreCase("none")){

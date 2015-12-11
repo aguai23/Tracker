@@ -66,14 +66,14 @@ public class UI_Profile extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (from.equals("follower")) {
-                                    Intent intent = new Intent(UI_Profile.this, UI_TrackingPage.class);
-                                    thisUser.deleteFollowing(contactName);
+                                    Intent intent = new Intent(UI_Profile.this, UI_TrackeePage.class);
+                                    thisUser.deleteFollowers(contactName);
                                     intent.putExtra("user", thisUser);
                                     startActivity(intent);
                                 }
                                 if (from.equals("following")) {
-                                    Intent intent = new Intent(UI_Profile.this, UI_TrackeePage.class);
-                                    thisUser.deleteFollowers(contactName);
+                                    Intent intent = new Intent(UI_Profile.this, UI_TrackingPage.class);
+                                    thisUser.deleteFollowing(contactName);
                                     intent.putExtra("user", thisUser);
                                     startActivity(intent);
                                 }
@@ -82,6 +82,7 @@ public class UI_Profile extends Activity {
                                 }
                             }
                         }
+
 
                 );
                 builder.setNegativeButton("no", new DialogInterface.OnClickListener()
@@ -94,6 +95,7 @@ public class UI_Profile extends Activity {
                         }
 
                 );
+                builder.show();
 
             }
         });
