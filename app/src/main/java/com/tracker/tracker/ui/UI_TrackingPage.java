@@ -141,7 +141,7 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
 
             map.setMyLocationEnabled(true);
             if(i==0)
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(thisLocation, 13));
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(thisLocation, 13));
 
             map.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
@@ -152,17 +152,7 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
         }
 
 
-        LatLng sydney = new LatLng(-33.867, 151.206);
 
-        map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
-
-        map.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
-
-                .title("User1")
-                .snippet("The time stamp.")
-                .position(sydney)).showInfoWindow();
 
 
     }
