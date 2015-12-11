@@ -62,6 +62,11 @@ public class UI_Login extends Activity {
                 boolean valid=thisUser.checkLogin();
 
                 if (valid) {
+                    if (!locationService.getIsrunning()){
+                        Intent intentservice = new Intent(getApplicationContext(), locationService.class);
+                        startService(intentservice);
+                    }
+                    locationService.setuser(user);
 
                     Intent intent = new Intent(UI_Login.this, UI_PersonalPage.class);
                     intent.putExtra("user",thisUser);

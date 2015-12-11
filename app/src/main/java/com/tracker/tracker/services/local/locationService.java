@@ -21,9 +21,11 @@ import java.util.jar.Manifest;
 public class locationService extends Service implements Serializable   {
     private boolean STOP_MYSERVICE = false;
 
-    private long TIMEOUT = 100000;
+    private long TIMEOUT = 10000;
 
     private String TAG ="LOCATION_SERVICE";
+
+    private static boolean isrunning = false;
 
     private webRequest webservice;
 
@@ -37,6 +39,9 @@ public class locationService extends Service implements Serializable   {
         webservice = new webRequest();
     }
 
+    public static boolean getIsrunning(){
+        return isrunning;
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -50,6 +55,7 @@ public class locationService extends Service implements Serializable   {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        isrunning = true;
 
         Thread thread = new Thread(new Runnable() {
             @Override

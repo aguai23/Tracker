@@ -67,21 +67,24 @@ public class UI_Register extends Activity {
 
             boolean inputValid;
             boolean serverValid;
-            try{
+            try {
                 thisUser = new User();
-                inputValid=checkValid(user,pass, nameString, phoneString, emailString);
+                inputValid = checkValid(user, pass, nameString, phoneString, emailString);
 
-                if(!inputValid){
+                if (!inputValid) {
                     throw new NoInputException();
                 }
 
                 serverValid = thisUser.register(user, pass, nameString, phoneString, emailString);
-                if(!serverValid){
+                if (!serverValid) {
                     throw new UserExistException();
                 }
 
-                Intent intentservice = new Intent(getApplicationContext(), locationService.class);
-                startService(intentservice);
+                if (!locationService.getIsrunning()){
+                    Intent intentservice = new Intent(getApplicationContext(), locationService.class);
+                    startService(intentservice);
+                }
+                locationService.setuser(user);
 
                 Intent intent = new Intent(UI_Register.this, UI_PersonalPage.class);
                 intent.putExtra("user",thisUser);
