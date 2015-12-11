@@ -36,6 +36,8 @@ public class locationService extends Service implements Serializable   {
 
     public static void setuser(String name){
         username = name;
+        last_latitude = 0;
+        last_longitude = 0;
     }
 
     public locationService() {
