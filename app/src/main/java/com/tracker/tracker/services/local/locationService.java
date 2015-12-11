@@ -21,6 +21,9 @@ import java.util.jar.Manifest;
 public class locationService extends Service implements Serializable   {
     private boolean STOP_MYSERVICE = false;
 
+    private static double last_latitude = 0;
+    private static double last_longitude = 0;
+
     private long TIMEOUT = 10000;
 
     private String TAG ="LOCATION_SERVICE";
@@ -91,10 +94,16 @@ public class locationService extends Service implements Serializable   {
     }
 
     private void send_location(double latitude, double longitude) {
-        java.util.Date today = new java.util.Date();
-        Timestamp tsTemp = new java.sql.Timestamp(today.getTime());
-        DeviceLocation loc = new DeviceLocation(tsTemp, longitude, latitude);
 
-        webservice.send_location(loc, username);
+        if(last_latitude != latitude && last_longitude != longitude) {
+            java.util.Date today = new java.util.Date();
+            Timestamp tsTemp = new java.sql.Timestamp(today.getTime());
+            DeviceLocation loc = new DeviceLocation(tsTemp, longitude, latitude);
+            webservice.send_location(loc, username);
+            last_latitude = latitude;
+            last_longitude = longitude;
+        } else {
+            System.out.println("Same location Detected: NO UPDATE");
+        }
     }
 }
