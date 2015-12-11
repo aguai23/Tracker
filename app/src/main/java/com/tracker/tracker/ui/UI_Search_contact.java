@@ -3,7 +3,6 @@ package com.tracker.tracker.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,7 +45,7 @@ public class UI_Search_contact extends Activity {
             @Override
             public void onClick(View v) {
                 if(searchInfo!=null) {
-                    Intent intent = new Intent(UI_Search_contact.this, Add_contact.class);
+                    Intent intent = new Intent(UI_Search_contact.this, UI_addcontact.class);
                     intent.putExtra("user", thisUser);
                     intent.putExtra("search", searchInfo);
                     startActivity(intent);

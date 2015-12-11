@@ -9,13 +9,14 @@ import com.tracker.tracker.services.remote.webRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.security.Timestamp;
 import java.util.ArrayList;
 
 /**
  * Database layer between Model and data source
  */
-public class DbOperation extends DbFunction{
+public class DbOperation extends DbFunction implements Serializable{
 
     public static final String username = "username";
     public static final String phone = "phone_number";

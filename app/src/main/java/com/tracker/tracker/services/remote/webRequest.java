@@ -13,6 +13,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -27,7 +28,7 @@ import java.util.Map;
  * Class to send request, and receive response
  * from the remote service
  */
-public class webRequest {
+public class webRequest implements Serializable{
 
     public static String url = "http://128.237.163.155:8000";
     public HttpURLConnection connection;

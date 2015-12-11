@@ -1,6 +1,7 @@
 package com.tracker.tracker.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.tracker.tracker.R;
+import com.tracker.tracker.exception.TimeConflictException;
 import com.tracker.tracker.model.User;
 
 import java.sql.Time;
@@ -51,12 +53,17 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
     private Button back;
     private Button ok;
     private ArrayList<Timestamp>choice;
+    private String contact;
+    private ArrayList<LatLng>points;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specific_location);
         Intent intent=getIntent();
         thisUser=(User)intent.getSerializableExtra("user");
+        contact=(String)intent.getStringExtra("contact");
+        points=new ArrayList<>();
+
         back=(Button)findViewById(R.id.back);
         back.setOnClickListener(backButtonListener);
 
@@ -72,7 +79,12 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
         c.setTimeInMillis(now.getTime());
 
         choice=new ArrayList<>();
+        ArrayList<String>time=new ArrayList<>();
+
         for(int i=1;i<25;i++){
+
+            c.add(Calendar.HOUR,-1);
+
             int year= c.get(Calendar.YEAR);
             int month=c.get(Calendar.MONTH);
             int day=c.get(Calendar.DATE);
@@ -82,10 +94,10 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
                 hours+=24;
                 day=day-1;
             }
-            choice.add(new Timestamp(year,month,day,hours,0,0,0));
+            choice.add(new Timestamp(c.getTimeInMillis()));
+
         }
 
-        ArrayList<String>time=new ArrayList<>();
 
         for(int i=0;i<choice.size();i++){
             System.out.println(choice.get(i).toString());
@@ -95,7 +107,8 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
             int month=c1.get(Calendar.MONTH);
             int day=c1.get(Calendar.DATE);
             int hours=c1.get(Calendar.HOUR_OF_DAY);
-            time.add(year+"-"+month+"-"+day+"-"+hours);
+            //time.add(year+"-"+month+"-"+day+"-"+hours);
+            time.add(choice.get(i).toString());
 
         }
 
@@ -126,13 +139,49 @@ public class UI_SpecificLocation extends Activity implements OnMapReadyCallback 
     private View.OnClickListener okButtonListener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String fromTime=from.getSelectedItem().toString();
-            String toTime=to.getSelectedItem().toString();
-            Timestamp fromStamp=parseTimeString(fromTime);
-            Timestamp toStamp=parseTimeString(toTime);
+            String fromTime = from.getSelectedItem().toString();
+            String toTime = to.getSelectedItem().toString();
+            Timestamp fromStamp = Timestamp.valueOf(fromTime);
+            Timestamp toStamp = Timestamp.valueOf(toTime);
+
+            try {
+                if (fromStamp.after(toStamp)) {
+                    throw new TimeConflictException();
+                }
+                points.clear();
+                locations=thisUser.get_location(contact);
+                for(int i=0;i<locations.size();i++){
+                    ArrayList<Timestamp> times=new ArrayList<>(locations.keySet());
+                    if(times.get(i).after(fromStamp) && times.get(i).before(toStamp)){
+                        Pair<Double,Double>location=locations.get(times.get(i));
+                        LatLng point=new LatLng(location.first,location.second);
+                        points.add(point);
+                        map.addMarker(new MarkerOptions()
+                                .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
+
+                                .title(contact)
+                                .snippet(times.get(i).toString())
+                                .position(point)).showInfoWindow();
+
+                    }
+
+
+                }
+            }
+            catch (Exception e){
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(UI_SpecificLocation.this);
+
+                // set dialog title & message, and provide Button to dismiss
+                builder.setTitle("Time conflict");
+                builder.setMessage("from time must be ealier");
+                builder.setPositiveButton("OK", null);
+                builder.show(); // display the Dialog
+            }
             System.out.println(fromStamp.toString());
 
-            locations=thisUser.get_location(thisUser.getUsername());
+            locations = thisUser.get_location(thisUser.getUsername());
+
 
             //put these locations onto the map
         }

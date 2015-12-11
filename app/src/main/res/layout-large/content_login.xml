@@ -41,6 +41,8 @@
             android:id="@+id/textView"
             android:textSize="20dp"
             android:textColor="#f8f5f5"
+
+            android:textColorHint="@color/orange"
             android:layout_marginLeft="100dp"/>
 
         <EditText
@@ -84,6 +86,7 @@
             android:inputType="textPersonName"
             android:layout_below="@+id/username"
             android:textSize="20dp"
+            android:textColor="#f8f5f5"
             android:textColorHint="@color/orange"
             android:layout_marginLeft="20dp"/>
 

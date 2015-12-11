@@ -56,20 +56,25 @@ public class UI_Login extends Activity {
             String pass=password.getText().toString();
 
 
+
             try {
                 if (user.length() == 0 || pass.length() == 0) {
                     throw new NoInputException();
                 }
 
-                thisUser=new User(user,pass);
+                thisUser=new User();
+
 
                 boolean valid=thisUser.checkLogin();
 
+
                 if (valid) {
+                    System.out.println("click");
                     thisUser.setUsername("user1");
                     thisUser.setName("me");
                     thisUser.setEmail("yyiiu@gmail");
                     thisUser.setPhone("33322232323");
+                    System.out.println("click");
 
                     Intent intent = new Intent(UI_Login.this, UI_PersonalPage.class);
                     intent.putExtra("user",thisUser);

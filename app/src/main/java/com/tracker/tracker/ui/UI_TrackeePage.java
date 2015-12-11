@@ -96,6 +96,7 @@ public class UI_TrackeePage extends Activity {
                     //get User object by user name
                     Intent intent=new Intent(UI_TrackeePage.this,UI_Profile.class);
                     intent.putExtra("user",thisUser);
+                    intent.putExtra("from","follower");
                     startActivity(intent);
                 }
             });

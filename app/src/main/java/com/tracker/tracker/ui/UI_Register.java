@@ -7,8 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.tracker.tracker.R;
+import com.tracker.tracker.exception.InvalidAccountException;
+import com.tracker.tracker.exception.NoInputException;
+import com.tracker.tracker.exception.UserExistException;
 import com.tracker.tracker.model.User;
 
 public class UI_Register extends Activity {
@@ -21,6 +25,7 @@ public class UI_Register extends Activity {
     private EditText email;
     private User thisUser;
     private Button back;
+    private TextView error;
 
 
     @Override
@@ -37,6 +42,8 @@ public class UI_Register extends Activity {
         name=(EditText)findViewById(R.id.name);
         phone=(EditText)findViewById(R.id.phone);
         email=(EditText)findViewById(R.id.email);
+
+        error=(TextView)findViewById(R.id.error);
 
         back=(Button)findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +63,7 @@ public class UI_Register extends Activity {
             String nameString=name.getText().toString();
             String phoneString=phone.getText().toString();
             String emailString=email.getText().toString();
+
             boolean inputValid;
             boolean serverValid;
             try{
@@ -63,15 +71,17 @@ public class UI_Register extends Activity {
                 inputValid=checkValid(user,pass, nameString, phoneString, emailString);
 
                 if(!inputValid){
-                    return ; // TODO
+                    throw new NoInputException();
                 }
 
                 serverValid = thisUser.register(user, pass, nameString, phoneString, emailString);
                 if(!serverValid){
-                    return ; // TODO
+                    throw new UserExistException();
                 }
 
                 thisUser.register(user,pass,nameString,phoneString,emailString);
+
+                //hard code data
                 thisUser.setUsername(user);
                 thisUser.setName(nameString);
                 thisUser.setPhone(phoneString);
@@ -82,6 +92,7 @@ public class UI_Register extends Activity {
                 startActivity(intent);
             }
             catch (Exception e){
+                error.setText(e.getMessage());
 
             }
 
@@ -90,6 +101,10 @@ public class UI_Register extends Activity {
     };
 
     private boolean checkValid(String username,String password,String name,String phone,String email){
+        if(username.length()==0 || password.length()==0 || name.length()==0 || phone.length()==0
+                || email.length()==0)
+        return false;
+
         return true;
     }
 

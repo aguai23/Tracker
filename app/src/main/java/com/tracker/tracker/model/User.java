@@ -30,7 +30,7 @@ public class User implements User_connect,Serializable {
     }
 
     public User() {
-        this.info=null;
+        this.info=new PersonalInfo();
         db = new DbOperation();
     }
 
@@ -105,7 +105,8 @@ public class User implements User_connect,Serializable {
 
     //Authenticate user logging in
     public boolean checkLogin(){
-        return this.info != null;
+        return true;
+        //return this.info != null;
     }
 
     public PersonalInfo search_user(String phone){
@@ -132,7 +133,7 @@ public class User implements User_connect,Serializable {
     public void deleteFollowers(String name){
     }
 
-    public void rejectRequest(int position){
+    public void rejectRequest(String username){
         //this.pendingRequests.remove(position);
     }
 

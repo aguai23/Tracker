@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,7 +27,11 @@ import com.tracker.tracker.R;
 import com.tracker.tracker.model.PersonalInfo;
 import com.tracker.tracker.model.User;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
 public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
 
@@ -45,13 +50,18 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_page);
         Intent intent=getIntent();
-        contact=new ArrayList<>();
+
         thisUser=(User)intent.getSerializableExtra("user");
         contact=thisUser.getFollowings();
+        if(contact==null)
+            contact=new ArrayList<>();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         ArrayAdapter<String>contactAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,contact);
         listButton = (Button) findViewById(R.id.listButton);
         listButton.setOnClickListener(listButtonListener);
+
+        if(contact.size()==0)
+            listButton.setClickable(false);
 
         list=(Spinner)findViewById(R.id.list);
         list.setAdapter(contactAdapter);
@@ -122,6 +132,26 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+        for(int i=0;i<contact.size();i++){
+            Map<Timestamp,Pair<Double,Double>> locations=thisUser.get_location(contact.get(i));
+            Pair<String,Pair<Double,Double>> location=getLatest(locations);
+
+            LatLng thisLocation=new LatLng(location.second.first,location.second.second);
+
+            map.setMyLocationEnabled(true);
+            if(i==0)
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(thisLocation, 13));
+
+            map.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("marker", 30, 30)))
+
+                    .title(contact.get(i))
+                    .snippet(location.first )
+                    .position(thisLocation)).showInfoWindow();
+        }
+
+
         LatLng sydney = new LatLng(-33.867, 151.206);
 
         map.setMyLocationEnabled(true);
@@ -134,13 +164,6 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
                 .snippet("The time stamp.")
                 .position(sydney)).showInfoWindow();
 
-        map.addPolyline(new PolylineOptions().geodesic(true)
-                .add(new LatLng(-33.866, 151.195))  // Sydney
-                .add(new LatLng(-18.142, 178.431))  // Fiji
-                .add(new LatLng(21.291, -157.821))  // Hawaii
-                .add(new LatLng(37.423, -122.091))// Mountain View
-                .color(Color.GREEN)
-        );
 
     }
 
@@ -164,6 +187,14 @@ public class UI_TrackingPage extends Activity implements OnMapReadyCallback {
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(iconName, "drawable", getPackageName()));
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
         return resizedBitmap;
+    }
+
+    public Pair<String,Pair<Double,Double>> getLatest(Map<Timestamp,Pair<Double,Double>>locations){
+        ArrayList<Timestamp>times=new ArrayList<>(locations.keySet());
+        Collections.sort(times);
+        Pair location=new Pair(times.get(0).toString(),locations.get(times.get(0)));
+        return location;
+
     }
 
 }

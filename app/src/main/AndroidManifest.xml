@@ -128,7 +128,7 @@
             android:value="AIzaSyAl_TPfioJCBRuLlG4ZnfGL78gJO3Nmf6g" />
 
         <activity
-            android:name=".ui.Add_contact"
+            android:name=".ui.UI_addcontact"
             android:label="@string/title_activity_add_contact"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

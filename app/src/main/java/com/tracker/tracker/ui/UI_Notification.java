@@ -36,9 +36,12 @@ public class UI_Notification extends Activity {
         request=thisUser.getPendings();
         list=(ListView)findViewById(R.id.list);
         back=(Button)findViewById(R.id.back);
-        myAdapter=new RequestAdapter(this,request);
 
-        list.setAdapter(myAdapter);
+        if(request!=null) {
+            myAdapter = new RequestAdapter(this, request);
+
+            list.setAdapter(myAdapter);
+        }
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +72,7 @@ public class UI_Notification extends Activity {
             Button reject=(Button)convertView.findViewById(R.id.reject);
             String current=getItem(position);
             contact.setText(current);
+            contact.setClickable(true);
 
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,11 +89,23 @@ public class UI_Notification extends Activity {
             reject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    thisUser.rejectRequest(position);
+                    thisUser.rejectRequest(getItem(position));
 
 
                     request.remove(position);
                     myAdapter.notifyDataSetChanged();
+                }
+            });
+
+            contact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent=new Intent(UI_Notification.this,UI_Profile.class);
+                    intent.putExtra("contact",getItem(position));
+                    intent.putExtra("from","notification");
+                    startActivity(intent);
+
                 }
             });
 
