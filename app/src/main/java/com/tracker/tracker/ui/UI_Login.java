@@ -16,6 +16,7 @@ import com.tracker.tracker.exception.InvalidAccountException;
 import com.tracker.tracker.exception.NoInputException;
 import com.tracker.tracker.exception.NoInputException;
 import com.tracker.tracker.model.User;
+import com.tracker.tracker.services.local.locationService;
 
 public class UI_Login extends Activity {
 
@@ -30,6 +31,8 @@ public class UI_Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Intent intent = new Intent(this, locationService.class);
+        startService(intent);
 
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(loginButtonListener);

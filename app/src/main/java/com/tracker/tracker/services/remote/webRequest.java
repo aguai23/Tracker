@@ -36,7 +36,7 @@ import java.util.Map;
  */
 public class webRequest implements Serializable{
 
-    public static String url = "http://128.237.163.155:8000";
+    public static String url = "http://128.237.180.213:8000";
     public HttpURLConnection connection;
 
     public JSONObject request;
@@ -338,7 +338,7 @@ public class webRequest implements Serializable{
         JSONObject obj_res = null;
         try {
             obj_res = new JSONObject(response);
-            if(!((String)obj_res.get("error")).equalsIgnoreCase("none")){
+            if(((String)obj_res.get("error")).equalsIgnoreCase("none")){
                 success = false;
             }
         } catch (JSONException e) {

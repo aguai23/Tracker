@@ -137,6 +137,7 @@ public class User implements User_connect,Serializable {
     public boolean register(String username,String password,String name,String phone,String email){
         if(info == null)info = new PersonalInfo(username, name, phone, email);
         Boolean ret = db.create_user(info, password);
+
         if(ret) locationService.setuser(username);
         return ret;
     }
