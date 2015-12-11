@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Database layer between Model and data source
@@ -79,9 +80,65 @@ public class DbOperation extends DbFunction implements Serializable{
         return false;
     }
 
-    public ArrayList<Pair<Location, Timestamp>> get_userLocation(PersonalInfo user){
-        ArrayList<Pair<Location, Timestamp>> locations = null;
+    @Override
+    public Map<java.sql.Timestamp,Pair<Double,Double>> get_location(String uname) {
+        return remote.get_location(uname);
+    }
 
-        return locations;
+    @Override
+    public PersonalInfo search_user(String phone) {
+        return remote.search_user(phone);
+    }
+
+    @Override
+    public PersonalInfo get_user(String uname) {
+        return remote.get_user(uname);
+    }
+
+    @Override
+    public void delete_user(String uname) {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put(this.username, uname);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        remote.delete_user(obj);
+    }
+
+    @Override
+    public ArrayList<String> getFollowers(String uname) {
+        return remote.get_followers(uname);
+    }
+
+    @Override
+    public ArrayList<String> getFollowing(String uname) {
+        return remote.get_following(uname);
+    }
+
+    @Override
+    public ArrayList<String> getPending(String uname) {
+        return remote.get_pending(uname);
+    }
+
+    @Override
+    public boolean add_relation(String from, String to) {
+        return remote.add_relation(from, to);
+    }
+
+    @Override
+    public void add_request(String from, String to) {
+        remote.add_request(from, to);
+    }
+
+    @Override
+    public void delete_relation(String from, String to) {
+        remote.delete_relation(from, to);
+    }
+
+    @Override
+    public void delete_request(String from, String to) {
+        remote.delete_request(from, to);
     }
 }

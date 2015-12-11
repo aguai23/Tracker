@@ -1,26 +1,17 @@
 package com.tracker.tracker.model;
 
+import java.sql.Timestamp;
+
 /**
  * Device Location information
  */
 public class DeviceLocation {
-    private String timestamp;
     private Double lattitude;
     private Double longitude;
 
-    public DeviceLocation(String timestamp, Double longitude, Double lattitude) {
-        this.timestamp = timestamp;
+    public DeviceLocation(Timestamp timestamp, Double longitude, Double lattitude) {
         this.longitude = longitude;
         this.lattitude = lattitude;
-    }
-
-    public String getTimestamp() {
-
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
     }
 
     public Double getLongitude() {

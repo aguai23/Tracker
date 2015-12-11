@@ -30,7 +30,7 @@ public class User implements User_connect,Serializable {
     }
 
     public User() {
-        this.info=new PersonalInfo();
+        this.info=null;
         db = new DbOperation();
     }
 
@@ -80,70 +80,62 @@ public class User implements User_connect,Serializable {
 
     @Override
     public ArrayList<String> getFollowers() {
-        return null;
+        return db.getFollowers(this.getUsername());
     }
 
     @Override
     public ArrayList<String> getFollowings() {
-        return null;
+        return db.getFollowing(this.getUsername());
     }
 
     @Override
     public ArrayList<String> getPendings() {
-        return null;
+        return db.getPending(this.getUsername());
     }
 
     public void addFollowing(String username){
-        //PersonalInfo contact=new PersonalInfo(username,name,phone,email);
-        //this.following.add(contact);
+        db.add_request(this.getUsername(), username);
     }
 
     public void addFollowers(String username){
-        //PersonalInfo contact=new PersonalInfo(username,name,phone,email);
-        //this.followers.add(contact);
+         db.add_relation(username, this.getUsername());
     }
 
     //Authenticate user logging in
     public boolean checkLogin(){
-        return true;
-        //return this.info != null;
+        return this.info != null;
     }
 
     public PersonalInfo search_user(String phone){
-        return null;
+        return db.search_user(phone);
     }
 
-    public PersonalInfo get_user(String username){
-
-        return null;
+    public PersonalInfo get_user(String uname){
+        return db.get_user(uname);
     }
 
-    public Map<Timestamp,Pair<Double,Double>> get_location(String username){
-        Map<Timestamp,Pair<Double,Double>> locations = new HashMap<Timestamp,Pair<Double,Double>>();
-
-        return locations;
+    public Map<Timestamp,Pair<Double,Double>> get_location(String uname){
+        return db.get_location(uname);
     }
 
     public void updateInfo(String name,String phone,String email){
+        PersonalInfo old = db.get_user(this.getUsername());
     }
 
     public void deleteFollowing(String name){
+        db.delete_relation(this.getUsername(), name);
     }
 
     public void deleteFollowers(String name){
+        db.delete_relation(name, this.getUsername());
     }
 
     public void rejectRequest(String username){
-        //this.pendingRequests.remove(position);
+        db.delete_request(username, this.getUsername());
     }
 
     public boolean register(String username,String password,String name,String phone,String email){
         if(info == null)info = new PersonalInfo(username, name, phone, email);
-        /* this.info.setUsername(username);
-         this.info.setEmail(email);
-         this.info.setName(name);
-         this.info.setPhone(phone);
-         */
         Boolean ret = db.create_user(info, password);
         if(ret) locationService.setuser(username);
         return ret;
